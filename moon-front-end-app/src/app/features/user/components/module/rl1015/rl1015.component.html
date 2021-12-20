@@ -1,0 +1,147 @@
+<div class="table-responsive">
+  <table class="table table-bordered  table-sm">
+    <tbody>
+      <tr>
+        <td>Flat No</td>
+        <td>:</td>
+        <td>{{ flat.itemId }}</td>
+      </tr>
+      <tr>
+        <td>Project Name</td>
+        <td>:</td>
+        <td>{{ flat.projectNo }}</td>
+      </tr>
+      <tr>
+        <td>Project Type</td>
+        <td>:</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Project Location</td>
+        <td>:</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Rajuk Approval No</td>
+        <td>:</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Flat Size</td>
+        <td>:</td>
+        <td>{{flat.flatSize}}</td>
+      </tr>
+
+      <tr>
+        <td>Flat Place of Storied</td>
+        <td>:</td>
+        <td>{{ flat.flatPlaceofStorid }}</td>
+      </tr>
+      <tr>
+        <td>Flat Type</td>
+        <td>:</td>
+        <td>{{ flat.faltType }}</td>
+      </tr>
+      <tr>
+        <td>Flat No</td>
+        <td>:</td>
+        <td>{{ flat.flatNo }}</td>
+      </tr>
+      <tr>
+        <td>Number Of Lift</td>
+        <td>:</td>
+        <td>{{ flat.numberOfLift }}</td>
+      </tr>
+      <tr>
+        <td>Decoration Condition</td>
+        <td>:</td>
+        <td>{{ flat.decorationCondition }}</td>
+      </tr>
+      <tr>
+        <td>Bedroom</td>
+        <td>:</td>
+        <td>{{ flat.bedRoom }}</td>
+      </tr>
+      <tr>
+        <td>Living and Dining</td>
+        <td>:</td>
+        <td>{{ flat.livingAndDining }}</td>
+      </tr>
+      <tr>
+        <td>Kitchen</td>
+        <td>:</td>
+        <td>{{ flat.kitchen }}</td>
+      </tr>
+      <tr>
+        <td>Balcony</td>
+        <td>:</td>
+        <td>{{ flat.numberOfBalcony }}</td>
+      </tr>
+      <tr>
+        <td>Toilet</td>
+        <td>:</td>
+        <td>{{ flat.toilets }}</td>
+      </tr>
+      <tr>
+        <td>Swimming Pool</td>
+        <td>:</td>
+        <td>{{ flat.swimmingPool }}</td>
+      </tr>
+      <tr>
+        <td>Gym</td>
+        <td>:</td>
+        <td>{{ flat.gym }}</td>
+      </tr>
+      <tr>
+        <td>Flat Facing</td>
+        <td>:</td>
+        <td>{{ flat.facingNo }}</td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td>:</td>
+        <td>{{ flat.price }}</td>
+      </tr>
+      <tr>
+        <td>Total Price</td>
+        <td>:</td>
+        <td>{{ flat.totalPrice }}</td>
+      </tr>
+      <tr>
+        <td>Parking</td>
+        <td>:</td>
+        <td>{{ flat.parkingFlag }}</td>
+      </tr>
+      <tr>
+        <td>Parking Price</td>
+        <td>:</td>
+        <td>{{ flat.parkingPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Type</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of sizeList; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>
+              {{ item.flatType }}
+            </td>
+            <td>{{ item.flatSize }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

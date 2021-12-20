@@ -1,0 +1,68 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-3">
+        <h6>Accounts Balance List</h6>
+      </div>
+      <div class="col-md-5">
+        <input class="form-control list-item-surch-box" placeholder="Search here" type="text"
+          [(ngModel)]="searchString">
+      </div>
+      <div class="col-md-2">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>Show Record:&nbsp;</label>
+            <select class="form-control form-control-sm" [(ngModel)]="showRecordsNo" name="showRecordsNo">
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <div class="btn-group ml-3" role="group" aria-label="Basic example">
+          <button (click)="generatePdf('PR')" class="btn btn-secondary btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+          <button (click)="generatePdf('D')" class="btn btn-secondary btn-sm"><i class="fa fa-download"></i></button>
+          <button (click)="generatePdf('P')" class="btn btn-secondary btn-sm"><i class="fa fa-print"
+              aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover table-bordered table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-center">Serial</th>
+            <th>Nature Code</th>
+            <th>Nature Name </th>
+            <th>Acc Code</th>
+            <th>Acc Name</th>
+            <th class="text-center">Active</th>
+            <th class="text-center">Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let acBal of acBalacneList | filter : searchFields : searchString | paginate: { itemsPerPage: showRecordsNo, currentPage: curPage }; let i = index;">
+            <td class="text-center">{{ i+1 }}</td>
+            <td>{{ acBal.natureCode }}</td>
+            <td>{{ acBal.natureName}}</td>
+            <td>{{ acBal.accCode }}</td>
+            <td>{{ acBal.accName }}</td>
+            <td> {{ acBal.active}} </td>
+            <td> {{ acBal.balance | number : '1.2-2'}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+</div>

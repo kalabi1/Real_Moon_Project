@@ -1,0 +1,82 @@
+<br><br><br><br>
+<!-- Start page content -->
+<section id="page-content" class="page-wrapper">
+  <!-- CONTACT AREA START -->
+  <div class="contact-area pt-50 pb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 col-xs-12">
+          <!-- get-in-toch -->
+          <div class="get-in-toch">
+            <div class="section-title mb-30">
+              <h3>GET IN</h3>
+              <h2>TOUCH</h2>
+            </div>
+            <div class="contact-desc mb-50">
+              <p>We the <span data-placement="top" data-toggle="tooltip" data-original-title="The name you can trust"
+                  class="tooltip-content">South
+                  Star Group</span> always respect and value your dreams. We just wanted you
+                to know how much we value your association. It is our promise to provide you
+                with only the highest level of service at all times. Please stay in touch with
+                us and do not hesitate to call if there is anything further, we can help you
+                with.</p>
+            </div>
+            <br>
+            <ul class="contact-address">
+              <li>
+                <div class="contact-address-icon">
+                  <img src="assets/images/icons/location-2.png" alt="">
+                </div>
+                <div class="contact-address-info">
+                  <span>Road No # 02, House No # 02, (1<sup>st</sup> Floor) Gudaraghat </span>
+                  <span>Lake Drive Road, Gulshan-1,Dhaka-1212, Bangladesh.</span>
+                </div>
+              </li>
+              <li>
+                <div class="contact-address-icon">
+                  <img src="assets/images/icons/phone-3.png" alt="">
+                </div>
+                <div class="contact-address-info">
+                  <span>Telephone : +8802 883 5002</span>
+                  <span>Mobile : +880 1407 005502</span>
+                </div>
+              </li>
+              <li>
+                <div class="contact-address-icon">
+                  <img src="assets/images/icons/world.png" alt="">
+                </div>
+                <div class="contact-address-info">
+                  <span>Email : info@southstargroupbd.com</span>
+                  <span>Web :<a href="#" target="_blank"> www.southstargroupbd.com</a></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-7 col-xs-12">
+          <div class="contact-messge contact-bg">
+            <!-- blog-details-reply -->
+            <div class="leave-review">
+              <h5>Leave a Message</h5>
+              <form id="contact-form" method="post">
+                <input class="form-control" type="text" name="cpName" placeholder="Your name *"
+                  [(ngModel)]="rlContact.cpName">
+                <input class="form-control" type="email" name="cpEmail" placeholder="Email *"
+                  [(ngModel)]="rlContact.cpEmail">
+                <input class="form-control" type="text" name="cpMobile" placeholder="Phone number *"
+                  [(ngModel)]="rlContact.cpMobile">
+                <textarea class="form-control" name="cpComments" placeholder="Write here"
+                  [(ngModel)]="rlContact.cpComments"></textarea>
+                <button type="submit" class="submit-btn-1" (click)="onclickSendContactMail()">SUBMIT</button>
+              </form>
+              <p class="form-messege mb-0"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</section>
+<!-- End page content -->

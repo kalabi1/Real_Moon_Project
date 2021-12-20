@@ -1,0 +1,47 @@
+<br><br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <h6 class="card-header">Account Category</h6>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-hover table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="text-center">SL#</th>
+              <th scope="col">Nature Name</th>
+              <th scope="col">Nature Code</th>
+              <th scope="col">Nature Type</th>
+              <th scope="col">SL No.</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nature of acNatureList; let i = index">
+              <td>
+                <div class="border-control-sm border text-center">{{i+1}}</div>
+              </td>
+              <td><input name="natureName-i" name="natureName-i" [(ngModel)]="nature.natureName" type="text"
+                  class="form-control form-control-sm"></td>
+              <td><input name="natureCode-i" name="natureCode-i" [(ngModel)]="nature.natureCode" type="text"
+                  class="form-control form-control-sm"></td>
+              <td> <select [(ngModel)]="nature.natureType" name="natureType-i" class="form-control form-control-sm">
+                  <option value="A">Assets</option>
+                  <option value="L">Liabilities</option>
+                  <option value="I">Income</option>
+                  <option value="E">Expenses</option>
+                </select></td>
+              <td><input [(ngModel)]='nature.slNo' type="text" class="form-control form-control-sm"></td>
+              <td><button class="btn btn-light btn-sm" (click)="onClickDeleteNature(nature.natureNo, i)"><i
+                    class="fa fa-times"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewNature()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveNatureList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

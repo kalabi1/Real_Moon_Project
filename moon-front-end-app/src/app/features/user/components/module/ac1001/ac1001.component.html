@@ -1,0 +1,58 @@
+<div class="card">
+  <h6 class="card-header">Voucher Type</h6>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-sm ">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="text-center">SL#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Prefix</th>
+              <th scope="col">Type</th>
+              <th scope="col">Description</th>
+              <th scope="col">Default</th>
+              <th scope="col">Generate ID</th>
+              <th scope="col">Generation Type</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let type of voucherTypeList; let i = index">
+              <td>
+                <div class="border-control-sm border text-center">{{i+1}}</div>
+              </td>
+              <td><input [(ngModel)]="type.typeName" type="text" name="typeName-i" class="form-control form-control-sm">
+              </td>
+              <td><input [(ngModel)]="type.alias" name="alias-i" type="text" class="form-control form-control-sm"></td>
+              <td> <select name="vtype-i" [(ngModel)]="type.vtype" class="form-control form-control-sm">
+                  <option value="CO">Cash Outflow</option>
+                  <option value="CI">Cash Inflow</option>
+                  <option value="JL">Journal</option>
+                </select></td>
+              <td><input name="descr-i" [(ngModel)]="type.descr" type="text" class="form-control form-control-sm"></td>
+              <td><input [(ngModel)]="type.vdefault" (change)="type.vdefault=type.vdefault?1:0"
+                  [checked]="type.vdefault===1" type="checkbox" class="form-check-input ml-2"></td>
+              <td><input (change)="type.autogenFlag=type.autogenFlag?1:0" name="autogenFlag-i"
+                  [checked]="type.autogenFlag===1" [(ngModel)]="type.autogenFlag" type="checkbox"
+                  class="form-check-input ml-4">
+              </td>
+              <td> <select name="genType-i" [(ngModel)]="type.genType" class="form-control form-control-sm">
+                  <option value="M">Monthly</option>
+                  <option value="Y">FY Yearly</option>
+                  <option value="D">Daily</option>
+                </select></td>
+              <td><button class="btn btn-light btn-sm " (click)="onClickDeleteVtype(type.vtypeNo, i)"><i
+                    class="fa fa-times text-center"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewVtype()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveVtypeList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

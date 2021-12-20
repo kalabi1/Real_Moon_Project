@@ -1,0 +1,273 @@
+<div class="card">
+  <h6 class="card-header">Company Setup</h6>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="card-header">Company Name</h6>
+        <div class="company-trn-list t-list border">
+          <ul class="list-unstyled">
+            <li *ngFor="let company of companyList;let i = index;" (click)="onClickActiveIndex(i)" class="list-item"
+              [class.ui-state-highlight]="i==listActiveIndex">{{company.companyName}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h4>Company Logo</h4>
+        <div class="company-photo border">
+          <img [src]="companyLogoUrl" alt="Company Logo">
+        </div>
+        <div class="form-group">
+          <div class="slider-wrapper">
+            <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="companyLogo" type="file"
+              (change)="changeCompanyLogo($event)" #fileCompanyLogo>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h4>Favicon Icon</h4>
+        <div class="favicon-photo border">
+          <img [src]="companyFaviconUrl" alt="Favicon icon">
+        </div>
+        <div class="form-group">
+          <div class="slider-wrapper">
+            <input (change)="changeCompanyFavicon($event)" class="form-control-file  form-control-sm mt-2"
+              #fileCompanyFavicon ng-model="file_upload" name="companyFavicon" type="file">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-2">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyName" name="companyName">
+        </div>
+      </div>
+      <div class="col-md-4 mt-2">
+        <div class="form-group">
+          <label>Company No.</label>
+          <input type="text" readonly class="form-control form-control-sm" [(ngModel)]="company.companyNo"
+            name="companyLogo">
+        </div>
+      </div>
+      <div class="col-md-4 mt-2">
+        <div class="form-group">
+          <label>Company Nickname</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyAlias"
+            name="companyAlias">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Company Slogan</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companySlogan"
+            name="companyslogan">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Address Line-1</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyAddr1"
+            name="companyAddr1">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Address Line-2</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyAddr2"
+            name="companyAddr2">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Mobile</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyMobile"
+            name="companyMobile">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Company Phone</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyPhone"
+            name="companyPhone">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Company E-mail</label>
+          <input type="email" class="form-control form-control-sm" [(ngModel)]="company.companyEmail"
+            name="companyEmail">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Company Webside</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.companyWebsite"
+            name="companyWebsite">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Office Time</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="company.officeTime" name="officeTime">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Company News</label>
+          <textarea class="form-control" name="" rows="5" [(ngModel)]="company.companyLatestNews"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h4 class="card-header">Office-1</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group ">
+              <label>Office-1 Name</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office1AddrName" name="office1AddrName">
+            </div>
+            <div class="form-group ">
+              <label>Office-1 Address</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office1Address" name="office1Address">
+            </div>
+            <div class="form-group">
+              <label>Office-1 Telephone No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office1TelephoneNo"
+                name="office1TelephoneNo">
+            </div>
+            <div class="form-group">
+              <label>Office-1 Mobile No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office1MobileNo" name="office1MobileNo">
+            </div>
+            <div class="form-group">
+              <label>Office-1 Email</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office1Email" name="office1Email">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card ">
+      <h4 class="card-header">Office-2</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group ">
+              <label>Office-2 Name</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office2AddrName" name="office2AddrName">
+            </div>
+            <div class="form-group ">
+              <label>Office-2 Address</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office2Address" name="office2Address">
+            </div>
+            <div class="form-group">
+              <label>Office-2 Telephone No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office2TelephoneNo"
+                name="office2TelephoneNo">
+            </div>
+            <div class="form-group">
+              <label>Office-2 Mobile No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office2MobileNo" name="office2MobileNo">
+            </div>
+            <div class="form-group">
+              <label>Office-2 Email</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office2Email" name="office2Email">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card ">
+      <h4 class="card-header">Office-3</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group ">
+              <label>Office-3 Name</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office3AddrName" name="office3AddrName">
+            </div>
+            <div class="form-group ">
+              <label>Office-3 Address</label>
+              <input class="form-control form-control-sm " [(ngModel)]="company.office3Address" name="office3Address">
+            </div>
+            <div class="form-group">
+              <label>Office-3 Telephone No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office3TelephoneNo"
+                name="office3TelephoneNo">
+            </div>
+            <div class="form-group">
+              <label>Office-3 Mobile No.</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office3MobileNo" name="office3MobileNo">
+            </div>
+            <div class="form-group">
+              <label>Office-3 Email</label>
+              <input class="form-control form-control-sm" [(ngModel)]="company.office3Email" name="office3Email">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="card ">
+  <h4 class="card-header">Rep Fotter</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group ">
+          <label>Rep Fotter Dev</label>
+          <input class="form-control form-control-sm " [(ngModel)]="company.repFooterDev" name="repFooterDev">
+        </div>
+        <div class="form-group">
+          <label>Rep Fotter-1</label>
+          <input class="form-control form-control-sm" [(ngModel)]="company.repFooter1" name="repFooter1">
+        </div>
+        <div class="form-group">
+          <label>Rep Fotter-2</label>
+          <input class="form-control form-control-sm" [(ngModel)]="company.repFooter2" name="repFooter2">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <button class="btn btn-primary btn-sm" (click)="onClickSave()" *ngIf="!company.companyNo"><i
+      class="fa fa-check"></i>&nbsp;Save</button>
+  <button class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()" *ngIf="company.companyNo"><i
+      class="fa fa-refresh"></i>&nbsp;Update</button>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <h4 class="card-header">Slider</h4>
+      <div class="card-body">
+        <div class="slider-wrapper">
+          <div class="slider-list">
+            <div *ngFor="let slider of sliderList; let i = index" class="slider-item">
+              <span class="slider-item__delete" (click)="onClickDeleteSlider(slider.sliderNo, i)"><i
+                  class="fa fa-times"></i></span>
+              <img [src]="slider.imagePath" alt="">
+            </div>
+          </div>
+          <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="multipartFile" type="file"
+            (change)="fileChange($event)" #sliderFile>
+          <button [disabled]="!company.companyNo" class="btn btn-success btn-sm mt-2" (click)="onClickUploadImage()"><i
+              class="fa fa-upload"></i>&nbsp;Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

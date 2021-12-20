@@ -1,0 +1,107 @@
+<app-header></app-header>
+<br />
+<br />
+<div class="login-page-wrapper bg-gray">
+  <div class="login-wrapper">
+    <div class="login-form-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card p-4 mt-5 ">
+              <form class="login-form" (ngSubmit)="atemptLogin()">
+                <div class="singin-logo text-center mb-4">
+                  <img src="assets/images/logo/logo.png" alt="">
+                </div>
+                <div class="text-center">
+                  <h5 class="pb20  text-regular">User Sign in</h5>
+                </div>
+                <hr>
+                <div class="input-group input-group--user-name mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-user fa-lg text-primary"></i></span>
+                  </div>
+                  <input [(ngModel)]="username" required name="username" placeholder="E-mail or Mobile or Customer ID"
+                    type="text" class="form-control form-control-lg bg-white" required>
+                </div>
+                <!--/.input-group-->
+                <div class="input-group input-group--password mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-unlock-alt fa-lg text-primary "></i></span>
+                  </div>
+                  <input [(ngModel)]="password" required type="password" name="password"
+                    class="form-control form-control-lg bg-white" id="password" placeholder="Password" required>
+                </div>
+                <div class="d-flex justify-content-between align-items-center password-remember-wrapper">
+                  <div></div>
+                </div>
+                <!--/.input-group-->
+                <input type="submit"
+                  class="btn btn-lg sign-in-button btn-primary mt-base  btn-block text-bolder mt-4 mb-4"
+                  value="SIGN IN">
+              </form>
+              <!-- End Form-->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4 mt-5">
+              <form class="ragistation-form" (ngSubmit)="onClickSave()">
+                <div class="singin-logo text-center">
+                  <img src="assets/images/logo/logo.png" alt="">
+                </div>
+                <div class="text-center">
+                  <h5 class="mt-4  text-regular">Registration</h5>
+                </div>
+                <hr>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-users  fa-lg text-primary"></i></span>
+                  </div>
+                  <input name="customerName" [(ngModel)]="customer.customerName" required placeholder="Enter Your Name"
+                    type="text" class="form-control form-control-lg bg-white">
+                </div>
+                <div class="input-group  mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-envelope fa-lg text-primary"></i></span>
+                  </div>
+                  <input name="email" [(ngModel)]="customer.email" required placeholder="Enter Your E-mail Account"
+                    type="email" class="form-control form-control-lg bg-white">
+                </div>
+                <div class="input-group  mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-phone  fa-lg text-primary"></i></span>
+                  </div>
+                  <input name="mobile" [(ngModel)]="customer.mobile" required placeholder="Enter Your Phone Number"
+                    type="text" class="form-control form-control-lg bg-white">
+                </div>
+                <div class="input-group  mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-key  fa-lg text-primary"></i></span>
+                  </div>
+                  <input name="password" [(ngModel)]="customer.password" required placeholder="Create Password"
+                    type="password" class="form-control form-control-lg bg-white">
+                </div>
+                <div class="input-group  mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white"><i class="fa fa-key  fa-lg text-primary"></i></span>
+                  </div>
+                  <input name="confirmPassword" [(ngModel)]="customer.confirmPassword" required
+                    placeholder="Re-enter Password" type="password" class="form-control form-control-lg bg-white">
+                </div>
+                <div class="d-flex justify-content-end my-3">
+                  <button class="btn btn-lg sign-in-button btn-primary mt-base  btn-block text-bolder mt-4 mb-4"
+                    type="Submit">Register</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/.login-form-wrapper-->
+  </div>
+  <br />
+  <br />
+</div>
+<app-footer></app-footer>
+<nl-popup></nl-popup>

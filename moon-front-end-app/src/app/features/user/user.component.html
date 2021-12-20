@@ -1,0 +1,11 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-body">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+<div class="loader-wrapper loader-wrapper--overlay" *ngIf="spinnerService.block" [@simpleFadeAnimation]="'in'">
+  <div class="spinner-grow text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

@@ -1,0 +1,444 @@
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <h6 class="card-header">Plot Project Setup</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project No.</label>
+              <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="flat.projectId"
+                name="projectId">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Name</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.projectName" name="projectName">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Type</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.projectType" name="projectType">
+                <option value="R">Residential</option>
+                <option value="C">Commercial</option>
+                <option value="CO">Condominium</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Status</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.projectStatus" name="projectStatus">
+                <option value="OG">Sale going on</option>
+                <option value="CP">Complete Project</option>
+                <option value="UP">Upcoming Project</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Region</label>
+              <select (change)="onChangeGetSubRegionList()" class="form-control form-control-sm"
+                [(ngModel)]="flat.regionNo" name="regionNo">
+                <option *ngFor="let region of regionList" [value]="region.regionNo">
+                  {{ region.regionName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Subregion</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.subregionNo" name="subregionNo">
+                <option *ngFor="let subregion of subregionList" [value]="subregion.subregionNo">
+                  {{ subregion.subregionName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Project Location</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.projectLocation"
+                name="projectLocation">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Total Plot</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.numberOfPlot"
+                name="numberOfPlot">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Project Size</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.plotSize" name="plotSize">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>UoM</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.uomNo" name="uomNo">
+                <option *ngFor="let inuom of uomList" [value]="inuom.uomNo">{{ inuom.uomShort }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Block From</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.blockNameFrom" name="blockNameFrom">
+                <option *ngFor="let item of atozList" [value]="item.VALUE">{{ item.TEXT }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Block To</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.blockNameTo" name="blockNameTo">
+                <option *ngFor="let item of atozList" [value]="item.VALUE">{{ item.TEXT }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>General Plot No</label>
+              <input type="text" name="duplexPlotNo" class="form-control form-control-sm"
+                [(ngModel)]="flat.generalPlotNo">
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Duplex/Triplex Plot No</label>
+              <input type="text" [(ngModel)]="flat.duplexPlotNo" class="form-control form-control-sm"
+                name="duplexPlotNo">
+            </div>
+
+            <!--/.form-group-->
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Commercial Plot No</label>
+              <input [(ngModel)]="flat.commercialPlotNo" type="text" class="form-control form-control-sm"
+                name="commercialPlotNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Road Size</label>
+              <input [(ngModel)]="flat.roadSize" type="text" class="form-control form-control-sm" name="roadSize">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Mosque</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.mosqueFlag" name="mosqueFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Hospital</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.hospitalFlag" name="hospitalFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Market</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.marketFlag" name="marketFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Convention Center</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.conventionCenterFlag"
+                name="conventionCenterFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Educational Institute & Play Ground</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.eduInstituteFlag" name="eduInstituteFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fire Station</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.fireStationFlag" name="fireStationFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Sub Station</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.substationFlag" name="substationFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Pump House</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.pumpHouseFlag" name="pumpHouseFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Security Office</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.projectSecurityOfficeFlag"
+                name="projectSecurityOfficeFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Power Division</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.powerDivisionAapFlag"
+                name="powerDivisionAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fire & Safety</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.fireAndSafetyAapFlag"
+                name="fireAndSafetyAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Traffic Control Authority</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.trafficControlAuthAapFlag"
+                name="trafficControlAuthAapFlag">
+                <option value="2" selected>On Process</option>
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>City Corporation/Municipality</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.municipalityAapFlag"
+                name="municipalityAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Ward Commissioner/Union Council</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.wordCommAapFlag" name="wordCommAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Police Station</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.policeStationAapFlag"
+                name="policeStationAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>WASA</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.wasaAapFlag" name="wasaAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Civil Aviation</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.civilAviationAapFlag"
+                name="civilAviationAapFlag">
+                <option value="2" selected>On Process</option>
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Department of Environment</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.deptOfEnvAapFlag" name="deptOfEnvAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Gas &amp;Transmission Authority</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.gasAapFlag" name="gasAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Publish Status</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.publishFlag" name="publishFlag">
+                <option value="1">Publish</option>
+                <option value="0">Draft</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <br>
+          <!--/.form-group-->
+          <div class="col-md-12">
+            <div class="text-right">
+              <button *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onClickSave()"><i
+                  class="fa fa-check"></i>&nbsp;Save</button>
+              <button *ngIf="editMode" class="btn btn-secondary btn-sm" (click)="onClickNew()"><i
+                  class="fa fa-plus"></i>&nbsp;Add New</button>
+              <button *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()"><i
+                  class="fa fa-refresh"></i>&nbsp;Update</button>
+              <button *ngIf="editMode" class="btn btn-danger btn-sm m-1" (click)="onClickDelete(flat.projectNo)"><i
+                  class="fa fa-times"></i>&nbsp;Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card">
+      <h6 class="card-header">Project Layout</h6>
+      <div class="card-body">
+        <div class="slider-wrapper">
+          <img *ngIf="flat.projectLayoutPhoto" [src]="projectLayoutPhotoUrl" alt="">
+          <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="itemBrandPhoto" type="file"
+            (change)="changeBrandFile($event)" #fileInput>
+        </div>
+      </div>
+    </div>
+    <!-- Item Brand Photo Upload -->
+    <div class="card mt-2">
+      <h6 class="card-header">Video List</h6>
+      <div class="card-body">
+        <div class="video-list">
+          <div class="video-item" *ngFor="let item of videosList">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="float-left">{{item.videoTitle}}</h4>
+                <div class="float-right">
+                  <button class="btn btn-sm btn-danger" (click)="onClickDeleteVideo(item.videoNo, i)"><i
+                      class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-info ml-1" (click)="onClikUpdateFlag(item)"><i
+                      class="fa fa-pencil"></i></button>
+                </div>
+              </div>
+            </div>
+            <youtube-player [videoId]="item.youtubeVideoLink" (ready)="savePlayer($event)"
+              (change)="onStateChange($event)">
+            </youtube-player>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Video Title</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.videoTitle" name="videoTitle">
+        </div>
+        <div class="form-group">
+          <label>YouTube Video Link</label>
+          <input class="form-control form-control-sm" [(ngModel)]="flat.youtubeVideoLink" name="youtubeVideoLink">
+          <button *ngIf="!videoUpdateFlag" [disabled]="!flat.projectNo || !flat.youtubeVideoLink"
+            class="btn btn-success btn-sm mt-2" (click)="onClickSaveVideo()"><i
+              class="fa fa-upload"></i>&nbsp;Upload</button>
+          <button *ngIf="videoUpdateFlag" [disabled]="!flat.projectNo" class="btn btn-success btn-sm mt-2"
+            (click)="onClickUpdateVideo()"><i class="fa fa-pencil"></i>&nbsp;Update Video</button>
+        </div>
+      </div>
+    </div>
+    <!-- Video Slider End -->
+
+    <div class="card mt-2">
+      <h6 class="card-header">Slider List</h6>
+      <div class="card-body">
+        <div class="slider-list">
+          <div *ngFor="let item of sliderList; let i = index" class="slider-item">
+            <span class="slider-item__delete" (click)="onClickDeleteSlider(item.sliderNo, i)"><i
+                class="fa fa-times"></i></span>
+            <img [src]="item.imagePath" alt="">
+          </div>
+        </div>
+        <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="multipartFile" type="file"
+          (change)="fileChange($event)" #fileInput2>
+        <button class="btn btn-success btn-sm mt-2" (click)="onClickUploadImage()"
+          [disabled]="!flat.projectNo || !myInputVariable2.nativeElement.value"><i
+            class="fa fa-upload"></i>&nbsp;Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

@@ -1,0 +1,131 @@
+<!-- Start footer area -->
+<footer id="footer" class="footer-area  bg-opacity-black-90">
+  <div class="footer-top pt-50 pb-50">
+    <div class="container">
+      <div class="row">
+        <!-- footer-address -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="footer-widget">
+            <h6 class="footer-titel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{company.office1AddrName}}</h6>
+            <ul class="footer-address">
+              <li *ngIf="company.office1Address">
+                <div class="address-icon">
+                  <img src="assets/images/icons/location-2.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span>{{company.office1Address}}</span>
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/phone-3.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office1TelephoneNo">Telephone : {{company.office1TelephoneNo}}</span>
+                  <span *ngIf="company.office1MobileNo">Mobile : {{company.office1MobileNo}}</span>
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/world.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office1Email">Email : {{company.office1Email}}</span>
+                  <span *ngIf="company.companyWebsite">Web :<a href="#" target="_blank"> {{company.companyWebsite}}</a></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="footer-widget">
+            <h6 class="footer-titel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{company.office2AddrName}}</h6>
+            <ul class="footer-address">
+              <li *ngIf="company.office2Address">
+                <div class="address-icon">
+                  <img src="assets/images/icons/location-2.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span>{{company.office2Address}}</span>
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/phone-3.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office2TelephoneNo">Telephone : {{company.office2TelephoneNo}}</span>
+                  <span *ngIf="company.office2MobileNo">Mobile : {{company.office2MobileNo}}</span>
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/world.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office2Email">Email : {{company.office2Email}}</span>
+                  <span *ngIf="company.companyWebsite">Web :<a href="#" target="_blank"> {{company.companyWebsite}}</a></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="footer-widget">
+            <h6 class="footer-titel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{company.office3AddrName}}</h6>
+            <ul class="footer-address">
+              <li *ngIf="company.office3Address">
+                <div class="address-icon">
+                  <img src="assets/images/icons/location-2.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span> {{company.office3Address}}</span>
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/phone-3.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office3TelephoneNo">Telephone : {{company.office3TelephoneNo}}</span>
+                  <span *ngIf="company.office3MobileNo">Mobile : {{company.office3MobileNo}}</span>
+
+                </div>
+              </li>
+              <li >
+                <div class="address-icon">
+                  <img src="assets/images/icons/world.png" alt="">
+                </div>
+                <div class="address-info">
+                  <span *ngIf="company.office3Email">Email : {{company.office3Email}}</span>
+                  <span *ngIf="company.companyWebsite">Web :<a href="#" target="_blank"> {{company.companyWebsite}}</a></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="copyright text-left">
+            <p>Copyright &copy; 2019 All rights reserved.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-12">
+          <div class="copyright text-right">
+            <p>
+              Developed by: <a target="_blank" href="http://www.nahalit.com"> nahalit.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End footer area -->

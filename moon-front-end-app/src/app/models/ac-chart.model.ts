@@ -1,0 +1,78 @@
+export class AcChart {
+    accNo : number;
+    parentAccNo : number;
+    accName : string;
+    natureNo : number;
+    descr : string;
+    active : number;
+    accCode : string;
+    postFlg : number;
+    ssCreator : number;
+    ssCreatedOn : Date;
+    ssModifier : number;
+    ssModifiedOn : Date;
+    lvl : number;
+    orderSl : number;
+    costFlg : number;
+    defaultCurNo : number;
+    costSelType : string;
+    allocationActive : number;
+    buNo : number;
+    baFlg : number;
+    baSelType : string;
+    summaryReportLvl : number;
+    companyNo : number;
+    refCompanyNo : number;
+    oldAccCode : string;
+    daySummaryFlag : number;
+    accNameTree : string;
+    accPath : string;
+    tranFlag : number;
+    treeSummaryReportLvl : number;
+    treeLvl : number;
+    recurringFlag : number;
+    oid : string;
+    glcaPrnt : string;
+    natureNameCode : string;
+    refAccNo : number;    
+
+    constructor(options: any = {}) {
+        this.accCode = options.accCode || '';
+        this.accName = options.accName || '';
+        this.natureNameCode = options.natureNameCode || '';
+        this.accNameTree = options.accNameTree || '';
+        this.accNo = options.accNo || null;
+        this.accPath = options.accPath || '';
+        this.active = options.active || null;
+        this.allocationActive = options.allocationActive || null;
+        this.baFlg = options.baFlg || null;
+        this.baSelType = options.baSelType || '';
+        this.buNo = options.buNo || null;
+        this.companyNo = options.companyNo || null;
+        this.costFlg = options.costFlg || null;
+        this.costSelType = options.costSelType || '';
+        this.daySummaryFlag = options.daySummaryFlag || null;
+        this.defaultCurNo = options.defaultCurNo || null;
+        this.descr = options.descr || '';
+        this.glcaPrnt = options.glcaPrnt || '';
+        this.lvl = options.lvl || null;
+        this.natureNo = options.natureNo || null;
+        this.oid = options.oid || '';
+        this.oldAccCode = options.oldAccCode || '';
+        this.orderSl = options.orderSl || null;
+        this.parentAccNo = options.parentAccNo || null;
+        this.postFlg = options.postFlg || null;
+        this.recurringFlag = options.recurringFlag || null;
+        this.refAccNo = options.refAccNo || null;
+        this.refCompanyNo = options.refCompanyNo || null;
+        this.ssCreatedOn = options.ssCreatedOn? new Date(options.ssCreatedOn) : null;
+        this.ssCreator = options.ssCreator || null;
+        this.ssModifiedOn = options.ssModifiedOn? new Date(options.ssCreatedOn) : null;
+        this.ssModifier = options.ssModifier || null;
+        this.summaryReportLvl = options.summaryReportLvl || null;
+        this.tranFlag = options.tranFlag || null;
+        this.treeLvl = options.treeLvl || null;
+        this.treeSummaryReportLvl = options.treeSummaryReportLvl || null;
+        
+    }
+}

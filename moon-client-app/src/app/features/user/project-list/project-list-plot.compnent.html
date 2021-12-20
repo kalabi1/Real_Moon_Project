@@ -1,0 +1,211 @@
+<br />
+<div class="find-home-area bg-blue call-to-bg plr-140 pt-60 pb-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <div class="section-title text-white project-section-title">
+                    <h3>FIND YOUR</h3>
+                    <h2>HOME HERE</h2>
+                </div>
+            </div>
+            <div class="col-md-9 col-xs-12">
+                <div class="find-homes">
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item">
+                                <select
+                                    class="form-control form-control-sm input-background-control find-home-item-select"
+                                    name="projectTypeNo" [(ngModel)]="projectTypeNo" (change)="onChangeProjectType()">
+                                    <option value="" disabled>Select Item</option>
+                                    <option value="">All</option>
+                                    <option value="2">Apartment</option>
+                                    <option value="1">Plot</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item">
+                                <select (change)="onChangeGetSubRegionList()"
+                                    class="form-control form-control-sm input-background-control find-home-item-select"
+                                    [(ngModel)]="regionNo" name="regionNo" (change)="onClickSearch()">
+                                    <option value="" disabled>Select Region</option>
+                                    <option *ngFor="let region of regionList" [value]="region.regionNo">
+                                        {{ region.regionName }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item">
+                                <select
+                                    class="form-control form-control-sm input-background-control find-home-item-select"
+                                    [(ngModel)]="subregionNo" name="subregionNo" (change)="onClickSearch()">
+                                    <option value="" disabled>Select Sub Region</option>
+                                    <option *ngFor="let subregion of subregionList" [value]="subregion.subregionNo">
+                                        {{ subregion.subregionName }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item">
+                                <select (change)="onClickSearch()" [(ngModel)]="projectType" name="projectType"
+                                    class="form-control form-control-sm input-background-control find-home-item-select">
+                                    <option value="" disabled>Select Type</option>
+                                    <option value="">All</option>
+                                    <option value="R">Residential</option>
+                                    <option value="C">Commercial</option>
+                                    <option value="CO">Condominium</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item">
+                                <select (change)="onClickSearch()" [(ngModel)]="projectStatus" name="projectStatus"
+                                    class="form-control form-control-sm input-background-control find-home-item-select">
+                                    <option value="" disabled>Select Status</option>
+                                    <option value="">All</option>
+                                    <option value="OG">Sales going on</option>
+                                    <option value="CP">Complete Project</option>
+                                    <option value="UP">Upcoming Project</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="find-home-item mb-0-xs">
+                                <button type="button" class="btn btn-lg button-1 btn-hover-1 "
+                                    (click)="onClickSearch()"><i class="fa fa-search"></i> SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="card-header border project-list-header">
+        <div class="row ">
+            <div class="col-md-6">
+                <h5 class="text center">Project List</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="text-right">
+                    <h5>
+                        <a><i class="fa fa-list fa-lg ml-2" [class.text-dark]="listViewType===1"
+                                [class.text-gray]="listViewType!==1" (click)="onClickChangeType(1)"></i></a>
+                        <a class="ml-1"><i class="fa fa-table fa-lg" [class.text-dark]="listViewType===2"
+                                [class.text-gray]="listViewType!==2" (click)="onClickChangeType(2)"></i></a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="listViewType===1" class="project-list-wrapper border">
+        <div class="nl-project-item"
+            *ngFor="let project of prjectList | paginate: { itemsPerPage: 4, currentPage: curPage }">
+            <div class="nl-project-item__image border-right">
+                <img [src]="project.itemBrandPhoto" alt="">
+            </div>
+            <div class="nl-project-item__text-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="nl-project-item__title"><a
+                                [routerLink]="['/project-details', project.projectNo]">{{ project.projectName }}<span>
+                                    ({{project.projectId}})</span></a></h4>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="nl-project-item__desc"><strong>Project Location :</strong> {{project.projectLocation}}
+                        </p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.plotSize">
+                        <p class="nl-project-item__desc"><strong>Project Size :</strong>
+                            {{project.plotSize}} {{project.uomShort}}
+                        </p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.landArea">
+                        <p class="nl-project-item__desc"><strong>Land Area :</strong>
+                            {{project.landArea}} {{project.uomShort}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.noOfFlat">
+                        <p class="nl-project-item__desc"><strong>Total Flat :</strong>
+                            {{project.noOfFlat}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.roadSize">
+                        <p class="nl-project-item__desc"><strong>Road Size :</strong>
+                            {{project.roadSize}}
+                        </p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.projectTypeName">
+                        <p class="nl-project-item__desc"><strong>Project Type :</strong> {{project.projectTypeName}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.numberOfPlot">
+                        <p class="nl-project-item__desc"><strong>Plot Qty :</strong> {{project.numberOfPlot}}
+                            Approximate</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.blockNameFrom">
+                        <p class="nl-project-item__desc"><strong>Block :</strong> {{project.blockNameFrom}} To
+                            {{project.blockNameTo}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="project.projectStatus">
+                        <p class="nl-project-item__desc">
+                            <strong>Project Status : </strong>
+                            <span *ngIf="project.projectStatus == 'OG'">Sale going on</span>
+                            <span *ngIf="project.projectStatus == 'CP'">Complete Project</span>
+                            <span *ngIf="project.projectStatus == 'UP'">Upcoming Project</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="listViewType===2" class="row">
+        <div class="col-12">
+            <br>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12"
+            *ngFor="let project of prjectList | paginate: { itemsPerPage: 9, currentPage: curPage }">
+            <div class="flat-item">
+                <div class="flat-item-image">
+                    <span class="for-sale">{{ project.projectTypeName }}</span>
+                    <a [routerLink]="['/project-details', project.projectNo]">
+                        <img [src]="project.itemBrandPhoto" alt="Item Brand">
+                    </a>
+                    <div class="flat-link">
+                        <a [routerLink]="['/project-details', project.projectNo]">More Details</a>
+                    </div>
+                    <ul class="flat-desc">
+                        <li>
+                            <img src="assets/images/icons/4.png" alt="" *ngIf="project.landArea">
+                            <span *ngIf="project.landArea">{{ project.landArea }} {{project.uomShort}}</span>
+                        </li>
+                        <li>
+                            <img src="assets/images/icons/4.png" alt="" *ngIf="project.plotSize">
+                            <span *ngIf="project.plotSize">{{ project.plotSize }} {{project.uomShort}}</span>
+                        </li>
+                        <li>
+                            <span *ngIf="project.plotSize">Total Plot: {{ project.numberOfPlot }}</span>
+                        </li>
+                        <li>
+                            <span *ngIf="project.noOfFlat">Total Flat: {{ project.noOfFlat }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flat-item-info">
+                    <div class="flat-title-price">
+                        <h5><a [routerLink]="['/project-details', project.projectNo]">{{ project.projectId }} </a></h5>
+                    </div>
+                    <p>
+                        <img src="assets/images/icons/location.png" alt="">
+                        {{project.projectLocation}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="text-center">
+        <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+    </div>
+    <br>
+</div>

@@ -1,0 +1,74 @@
+<div class="row">
+  <!-- Region Setup -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Region Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Region Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [class.bg-light]="i==regionActiveIndex" *ngFor="let region of regionList; let i = index"
+                (click)="onClickSelectRegion(region.regionNo,i)">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="region.regionName"
+                    name="regionName-{{i}}"> </td>
+
+                <td><button class="btn btn-danger btn-sm"
+                    (click)="$event.stopPropagation();onClickDeleteRegion(region.regionNo, i)"><i
+                      class="fa fa-times"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewRegion()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveRegionList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+  <!-- Sub Region Setup -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Subregion Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Subregion Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [class.bg-light]="i==subregionActiveIndex" (click)="onClickSelectSubRegion(i)"
+                *ngFor="let subRegion of subregionList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="subRegion.subregionName"
+                    name="subregionName-{{i}}">
+                </td>
+
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteSubRegion(subRegion.subregionNo, i)"><i
+                      class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewSubRegion()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveSubRegionList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

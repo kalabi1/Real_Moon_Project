@@ -1,0 +1,124 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-2">
+        <h6 class="text-left">Voucher</h6>
+      </div>
+      <div class="col-md-6">
+        <input class="form-control list-item-surch-box"
+        placeholder="Search here" type="text" [(ngModel)]="searchString">
+      </div>
+    </div>
+    </div>
+  <div class="card-body">
+    <div class="table-responsive  scroll-8">
+      <table class="table table-striped table-bordered table-hover table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">SL#</th>
+            <th scope="col">Voucher No</th>
+            <th scope="col">Date</th>
+            <th scope="col">Voucher Type</th>
+            <th scope="col">Prepared By</th>
+            <th scope="col">Checked By</th>
+            <th scope="col">Checked Date</th>
+            <th scope="col">Posted By</th>
+            <th scope="col">Posted Date</th>
+            <th>Check?</th>
+            <th>Post?</th>
+            <th></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr [class.bg-light]="i==acVoucherActiveIndex" *ngFor="let acVoucher of acVoucherList | filter : searchFields : searchString ;let i = index;"
+            (click)="onClickGetVoucherDtl(acVoucher.vno,i)">
+            <td>
+              <div class="border-control-sm border">{{i+1}}</div>
+            </td>
+            <td class="w15"> <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="acVoucher.vid"
+                name="vid-i">
+            </td>
+            <td> <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="acVoucher.vdate"
+                name="vdate-i" bsDatepicker [isDisabled]="isDisabled" [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }"></td>
+            <td><input readonly [(ngModel)]="acVoucher.typeName" name="typeName-i" type="text"
+                class="form-control form-control-sm"></td>
+            <td><input readonly [(ngModel)]="acVoucher.preparedBy" name="preparedBy-i" type="text"
+                class="form-control form-control-sm"></td>
+            <td><input readonly [(ngModel)]="acVoucher.checkedBy" name="checkedBy-i" type="text"
+                class="form-control form-control-sm"></td>
+            <td><input readonly [(ngModel)]="acVoucher.checkDate" name="checkDate-i" type="text"
+                class="form-control form-control-sm" [isDisabled]="isDisabled" bsDatepicker [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }"></td>
+            <td><input readonly [(ngModel)]="acVoucher.postedBy" name="postedBy-i" type="text"
+                class="form-control form-control-sm"></td>
+            <td><input readonly [(ngModel)]="acVoucher.postDate" name="postDate-i" type="text"
+                class="form-control form-control-sm" [isDisabled]="isDisabled" bsDatepicker [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }"></td>
+            <td><input [(ngModel)]="acVoucher.checkFlag" type="checkbox"
+                (change)="acVoucher.checkFlag=acVoucher.checkFlag ? 1 : 0" [checked]="acVoucher.checkFlag===1"
+                class="custom-control form-check-input ml-1"
+                (click)="$event.stopPropagation(); onClickUpdateVoucherCheckStatus(i,acVoucher.vno,acVoucher.checkFlag)"
+                name="checkFlag-i"></td>
+            <td><input [(ngModel)]="acVoucher.postFlag" type="checkbox"
+                (change)="acVoucher.postFlag=acVoucher.postFlag ? 1 : 0" [checked]="acVoucher.postFlag===1"
+                class="custom-control form-check-input ml-1"
+                (click)="$event.stopPropagation(); onClickUpdateVoucherPostStatus(i,acVoucher.vno,acVoucher.postFlag)"
+                name="checkFlag-i"></td>
+            <td><button (click)="$event.stopPropagation();" class="btn btn-sm btn-secondary">Preview</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+<br>
+<div class="card">
+  <h6 class="card-header">Voucher Details</h6>
+  <div class="card-body">
+    <div class="table-responsive  scroll-4">
+      <table class="table table-striped table-bordered table-hover table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">SL#</th>
+            <th scope="col">ACC Code</th>
+            <th scope="col">Account Name</th>
+            <th scope="col">Narration</th>
+            <th scope="col">Cost Center</th>
+            <th scope="col">Business Area</th>
+            <th scope="col">Dr</th>
+            <th scope="col">Cr</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr [class.bg-light]="i==acVoucherdtlActiveIndex"
+            *ngFor="let acVoucherdtl of acVoucherdtlList;let i = index;">
+            <td>
+              <div class="border-control-sm border">{{i+1}}</div>
+            </td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.accCode" class="form-control form-control-sm">
+            </td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.accNameWithCode"
+                class="form-control form-control-sm"></td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.narration" class="form-control form-control-sm">
+            </td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.costName" class="form-control form-control-sm">
+            </td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.baName" class="form-control form-control-sm"></td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.dr" class="form-control form-control-sm"></td>
+            <td><input readonly type="text" [(ngModel)]="acVoucherdtl.cr" class="form-control form-control-sm"></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+<nl-popup></nl-popup>

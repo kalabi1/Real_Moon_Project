@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-2">
+        <h6>Order List</h6>
+      </div>
+      <div class="col-md-6">
+        <input class="form-control list-item-surch-box" placeholder="Search here" type="text"
+          [(ngModel)]="searchString">
+      </div>
+      <div class="col-md-2">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>Show Record:&nbsp;</label>
+            <select class="form-control form-control-sm" [(ngModel)]="showRecordsNo" name="showRecordsNo">
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <div class="btn-group ml-3" role="group" aria-label="Basic example">
+          <button (click)="generatePdf('PR')" class="btn btn-secondary btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+          <button (click)="generatePdf('D')" class="btn btn-secondary btn-sm"><i class="fa fa-download"></i></button>
+          <button (click)="generatePdf('P')" class="btn btn-secondary btn-sm"><i class="fa fa-print"
+              aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover table-bordered table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-center">Serial</th>
+            <th>Order No</th>
+            <th>Order Date</th>
+            <th>Item Name</th>
+            <th>Item Type</th>
+            <th class="text-center">Settlement Price</th>
+            <th class="text-center">Booking Amount</th>
+            <th class="text-center">Down Payment</th>
+            <th>Order Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let trn of trnList | filter : searchFields : searchString | paginate: { itemsPerPage: showRecordsNo, currentPage: curPage }; let i = index;">
+            <td class="text-center">{{ i+1 }}</td>
+            <td><a [routerLink]="['/rl1019', trn.trnNo]">{{ trn.trnId }}</a></td>
+            <td>{{ trn.trnDate | date:'d-MMM-y'}}</td>
+            <td>{{ trn.itemName }} ({{ trn.itemId }})</td>
+            <td>{{ trn.itemTypeName }}</td>
+            <td>
+              <div class="text-right">{{ trn.settlementPrice | number : '1.2-2' }}</div>
+            </td>
+            <td>
+              <div class="text-right">{{ trn.bookingAmount | number : '1.2-2' }}</div>
+            </td>
+            <td>
+              <div class="text-right">{{ trn.downPaymentAmount | number : '1.2-2' }}</div>
+            </td>
+            <td> {{trn.approveFlagName}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+</div>

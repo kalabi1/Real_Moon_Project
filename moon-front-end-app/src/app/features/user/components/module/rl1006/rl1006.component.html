@@ -1,0 +1,122 @@
+<div class="card-header border">
+  <div class="row ">
+    <div class="col-md-3">
+      <h6 class="text center">Apartment Item List</h6>
+    </div>
+    <div class="col-md-4"><input class="form-control list-item-surch-box" placeholder="Search here" type="text"
+        [(ngModel)]="searchString"></div>
+    <div class="col-md-2">
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Show Record:&nbsp;</label>
+          <select class="form-control form-control-sm" [(ngModel)]="showRecordsNo" name="showRecordsNo">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2">
+      <div class="btn-group ml-3" role="group" aria-label="Basic example">
+        <button (click)="generatePdf('PR')" class="btn btn-secondary btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+        <button (click)="generatePdf('D')" class="btn btn-secondary btn-sm"><i class="fa fa-download"></i></button>
+        <button (click)="generatePdf('P')" class="btn btn-secondary btn-sm"><i class="fa fa-print"
+            aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <div class="text-right">
+        <h5>
+          <a><i class="fa fa-list fa-lg ml-2" [class.text-dark]="listViewType===1" [class.text-gray]="listViewType!==1"
+              (click)="onClickChangeType(1)"></i></a>
+          <a class="ml-1"><i class="fa fa-table fa-lg" [class.text-dark]="listViewType===2"
+              [class.text-gray]="listViewType!==2" (click)="onClickChangeType(2)"></i></a>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="listViewType===1" class="list-wrapper border">
+  <div class="nl-list-item"
+    *ngFor="let item of allApartmentList | filter : searchFields : searchString | paginate: { itemsPerPage: showRecordsNo, currentPage: curPage }; let i = index;">
+    <div class="nl-list-item__image border-right">
+      <img [src]="item.itemBrandPhoto" alt="itemBrand photo">
+    </div>
+    <div class="nl-list-item__text-content">
+      <h4 class="nl-list-item__title"><a
+          [routerLink]="['/rl1005', item.itemNo]">{{ item.itemName }}<span>&nbsp;({{item.itemId}})</span></a> </h4>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Item Location:</strong> {{item.projectLocation}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>project Name:</strong> {{item.projectName}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Flat Size:</strong> {{item.flatSize}} {{item.uomShort}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Flat Type:</strong> {{item.flatType}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Flat Facing:</strong> {{item.facingName}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Price:</strong> {{item.price}}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="nl-list-item__desc"><strong>Total Price:</strong> {{item.totalPrice}}</p>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-12">
+          <div class="text-left">
+            <button class="btn btn-sm btn-danger m-1" (click)="onClickDeleteApartmentItem(item.itemNo, i)"><i
+                class="fa fa-times"></i>&nbsp;Delete</button>
+            <a class="btn btn-sm btn-dark" [routerLink]="['/rl1015', item.itemNo]"><i
+                class="fa fa-eye"></i>&nbsp;View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="listViewType===2" class="border">
+  <div class="table-responsive">
+    <table class="table table-sm table-hover table-bordered table-striped">
+      <tr>
+        <th>Serial</th>
+        <th>Flat ID</th>
+        <th>Project Name</th>
+        <th>Flat Size</th>
+        <th>Total Price</th>
+        <th>Action</th>
+      </tr>
+      <tr
+        *ngFor="let item of allApartmentList | filter : searchFields : searchString | paginate: { itemsPerPage: showRecordsNo, currentPage: curPage }; let i = index;">
+        <td>{{ i+1 }}</td>
+        <td>{{ item.itemId }}</td>
+        <td>{{ item.projectName }}</td>
+        <td>{{ item.flatSize }}</td>
+        <td>{{ item.totalPrice }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" [routerLink]="['/rl1005', item.itemNo]"><i
+              class="fa fa-pencil"></i>&nbsp;Edit</a>
+          <a class="btn btn-sm btn-dark ml-1" [routerLink]="['/rl1015', item.itemNo]"><i
+              class="fa fa-eye"></i>&nbsp;View</a>
+          <button class="btn btn-sm btn-danger m-1" (click)="onClickDeleteApartmentItem(item.itemNo, i)"><i
+              class="fa fa-times"></i></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+</div>
+<nl-popup></nl-popup>

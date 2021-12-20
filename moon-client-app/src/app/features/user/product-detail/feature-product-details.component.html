@@ -1,0 +1,400 @@
+<br />
+<br />
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="top">
+        <div class="row">
+          <div class="col-md-5 responsive-margin">
+            <span>
+              <h4 class="mb-0">{{ itemObj.itemName }} ({{itemObj.itemId}})</h4>
+            </span>
+            <br>
+          </div>
+          <div class="col-md-7">
+            <div class="price d-flex justify-content-end">
+              <h4 class="d-flex justify-content-end mt-1"><small><s *ngIf="itemObj.totalPrice!==itemObj.netPrice">
+                    {{ itemObj.totalPrice | number:'1.2-2' }}</s></small>
+                <span>&nbsp;{{ itemObj.netPrice | number:'1.2-2' }} Tk</span></h4>
+              &nbsp; &nbsp;
+              <button class="btn btn-danger float-right text-white responsive-button-addtocart"
+                [disabled]="cartAddcheck||itemObj.itemInventoryFlag===1"
+                [disabled]="cartAddcheck||itemObj.itemInventoryFlag===4" (click)="onClickAddToCart()">Add to
+                cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-wrapper">
+        <div class="pro-details-big-image">
+          <div class="tab-content">
+            <div *ngFor="let item of sliderList; let i = index" role="tabpanel"
+              [className]="sliderActiveIndex == i ? 'tab-pane fade in active' : 'tab-pane fade'"
+              [ngStyle]="{'opacity': sliderActiveIndex == i ?1:0}">
+              <a data-lightbox="image-1" data-title="Sheltek Properties - 1">
+                <img [src]="item.imagePath" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pro-details-carousel southtech-carosel-indicate">
+          <div class="pro-details-item" *ngFor="let item of sliderList; let i = index">
+            <a data-toggle="tab" (click)="onClickSliderThumbnail(i)"><img [src]="item.imagePath" alt=""></a>
+          </div>
+        </div>
+      </div>
+      <div class="pro-details-short-info mb-60">
+        <h4 class="mt-4">Facts and Features</h4>
+        <br />
+        <div class="item-feature-list-wrapper">
+          <div class="item-feature" *ngIf="itemObj.flatSize">
+            <div class="item-feature__icon"> <i class="fa fa-plus-square-o"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Area</h5>
+              <span class="item-feature__sub-title">{{ itemObj.flatSize }} {{ itemObj.uomShort }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.plotSize">
+            <div class="item-feature__icon"> <i class="fa fa-plus-square-o"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Area</h5>
+              <span class="item-feature__sub-title">{{ itemObj.plotSize }} {{ itemObj.uomShort }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.roadSize">
+            <div class="item-feature__icon"> <i class="fa fa-road"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">&nbsp;&nbsp;Road Size</h5>
+              <span class="item-feature__sub-title">&nbsp;&nbsp;{{ itemObj.roadSize }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="roadSideName">
+            <div class="item-feature__icon"> <i class="fa fa-arrows"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">&nbsp;Road Qty</h5>
+              <span class="item-feature__sub-title">
+                &nbsp;{{ roadSideName }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.facingNo">
+            <div class="item-feature__icon"> <i class="fa fa-arrows-h"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title"> &nbsp;Facing</h5>
+              <span class="item-feature__sub-title">
+                &nbsp;{{ itemObj.facingName }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.positionName">
+            <div class="item-feature__icon"> <i class="fa fa-chevron-right"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Position</h5>
+              <span class="item-feature__sub-title">
+                {{ itemObj.positionName }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.blockName">
+            <div class="item-feature__icon"> <i class="fa fa-bold"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Block</h5>
+              <span class="item-feature__sub-title">{{ itemObj.blockName }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.bookingMoney">
+            <div class="item-feature__icon"> <i class="fa fa-money"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">&nbsp;Booking Money</h5>
+              <span class="item-feature__sub-title">
+                &nbsp;{{ itemObj.bookingMoney  }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="priceNegotiableFlagvalue">
+            <div class="item-feature__icon"> <i class="fa fa-comments"></i> </div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">&nbsp;Price Negotiable</h5>
+              <span class="item-feature__sub-title">
+                &nbsp;{{ priceNegotiableFlagvalue  }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.bedRoom">
+            <div class="item-feature__icon"><i class="fa fa-bed"></i></div>
+            <div class="item-feature__text-content ml-2">
+              <h5 class="item-feature__title">Bedroom</h5>
+              <span class="item-feature__sub-title"> {{ itemObj.bedRoom }}</span>
+            </div>
+          </div>
+
+          <div class="item-feature" *ngIf="itemObj.livingAndDining">
+            <div class="item-feature__icon"><i class="fa fa-spoon"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Dining</h5>
+              <span class="item-feature__sub-title">{{ itemObj.livingAndDining }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.kitchen">
+            <div class="item-feature__icon"><i class="fa fa-cutlery"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Kitchen</h5>
+              <span class="item-feature__sub-title">{{ itemObj.kitchen }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.numberOfBalcony">
+            <div class="item-feature__icon"><i class="fa fa-university"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Balcony</h5>
+              <span class="item-feature__sub-title">{{ itemObj.numberOfBalcony }}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.toilets">
+            <div class="item-feature__icon"><i class="fa fa-bath"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Toilets</h5>
+              <span class="item-feature__sub-title">{{ itemObj.toilets}}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.swimmingPool">
+            <div class="item-feature__icon"><i class="fa fa-swimmer"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Swimming pool</h5>
+              <span class="item-feature__sub-title">{{ itemObj.swimmingPool}}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.numberOfLift">
+            <div class="item-feature__icon"><i class="fa fa-arrow-up"></i></div>
+            <div class="item-feature__text-content">
+              <h5 class="item-feature__title">Lift</h5>
+              <span class="item-feature__sub-title">{{ itemObj.numberOfLift}}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.gym">
+            <div *ngIf="itemObj.gym" class="item-feature__icon"><i class="fa fa-universal-access"></i></div>
+            <div class="item-feature__text-content">
+              <h5 *ngIf="itemObj.gym" class="item-feature__title">GYM</h5>
+              <span *ngIf="itemObj.gym" class="item-feature__sub-title">{{ itemObj.gym}}</span>
+            </div>
+          </div>
+          <div class="item-feature" *ngIf="itemObj.parkingPrice">
+            <div class="item-feature__icon"><i class="fa fa-car"></i></div>
+            <div class="item-feature__text-content ml-2">
+              <h5 class="item-feature__title">Parking Price</h5>
+              <span class="item-feature__sub-title">{{ itemObj.parkingPrice}}</span>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h4 class="mb-3" *ngIf="itemObj.itemTypeNo===2">Amenities</h4>
+        <div class="pro-details-amenities-inner pro-details-amenities-inner-4column border"
+          *ngIf="itemObj.itemTypeNo===2">
+          <ul class="amenities-list">
+            <li *ngIf="itemObj.conferenceHallFlag===1">conference hall</li>
+            <li *ngIf="itemObj.parkingFlag===1">Parking</li>
+            <li *ngIf="itemObj.securityFlag===1">Security</li>
+            <li *ngIf="itemObj.cctvFlag===1">CCTV</li>
+            <li *ngIf="itemObj.heatingFlag===1">Central Heating</li>
+            <li *ngIf="itemObj.coolingFlag===1">Central Cooling</li>
+            <li *ngIf="itemObj.cableTvFlag===1">Cable Tv</li>
+            <li *ngIf="itemObj.internetFlag===1">Shared Internet</li>
+          </ul>
+        </div>
+      </div>
+      <!-- start description -->
+      <div class="pro-details-description mt-4 mb-4">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Description</h4>
+          </div>
+          <div class="col-md-6">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input value="EN" type="radio" id="Englishdescr" name="languageoptiondescr"
+                [(ngModel)]="languageoptiondescr" class="custom-control-input">
+              <label class="custom-control-label" for="Englishdescr">English</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input value="BN" type="radio" id="Bangladescr" name="languageoptiondescr"
+                [(ngModel)]="languageoptiondescr" class="custom-control-input">
+              <label class="custom-control-label" for="Bangladescr">Bangla</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p *ngIf="languageoptiondescr==='EN'" class="mt-1 text-justify" [innerHTML]="itemObj.descr"></p>
+            <p *ngIf="languageoptiondescr==='BN'" class="mt-1 text-justify" [innerHTML]="itemObj.descrBn"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" *ngIf="itemObj.projectName"><strong>Project Name:</strong><a
+            [routerLink]="['/project-details', itemObj.projectNo]"> {{ itemObj.projectName }}
+            ({{ itemObj.projectId }})</a></div>
+        <div class="col-md-12"><strong>Project Approval Info:</strong> <a *ngIf="!aprovalinfo"
+            class="aprovalinfocontrol" (click)="onClickshowaprovalinfo()">&nbsp;&nbsp;Show (+)</a>
+          <a *ngIf="aprovalinfo" class="aprovalinfocontrol" (click)="onClickshowaprovalinfo()">&nbsp;&nbsp;Hide (-)</a>
+        </div>
+        <div class="col-md-12" *ngIf="aprovalinfo">
+          <div class="card m-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="">Power Division : {{ powerDivisionAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">WASA : {{ wasaAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Fair & Safety : {{ fireAndSafetyAapFlagvlaue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Civil Aviation: {{ civilAviationAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Traffic Control Authority : {{  trafficControlAuthAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">City Corporation/Municipality : {{  municipalityAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Ward Commissioner/Union Council : {{ wordCommAapFlagvalue}}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Police Station : {{ policeStationAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Department of Environment : {{ deptOfEnvAapFlagvalue }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p class="">Gas &amp;Transmission Authority : {{ gasAapFlagvalue }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="itemObj.projectLocation"><strong>Project Location:</strong>
+          {{ itemObj.projectLocation }}</div>
+        <div class="col-md-6" *ngIf="itemObj.decorationCondition"><strong>Decoration and Condition:</strong>
+          {{ itemObj.decorationCondition }}</div>
+        <div class="col-md-6" *ngIf="itemObj.flatPlaceofStorid"><strong>Flat Level:</strong>
+          {{ itemObj.flatPlaceofStorid }}</div>
+        <div class="col-md-6" *ngIf="itemObj.builtYear"><strong>Build Year:</strong> {{ itemObj.builtYear }}</div>
+      </div>
+      <hr>
+      <div class="pro-details-tremscondition mt-3">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Trams and Condition</h4>
+          </div>
+          <div class="col-md-6">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input value="E" type="radio" id="English" name="languageoption" [(ngModel)]="languageoption"
+                class="custom-control-input">
+              <label class="custom-control-label" for="English">English</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input value="B" type="radio" id="Bangla" name="languageoption" [(ngModel)]="languageoption"
+                class="custom-control-input">
+              <label class="custom-control-label" for="Bangla">Bangla</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p *ngIf="languageoption==='E'" class="mt-1 text-justify" [innerHTML]="itemObj.termsAndCondition"></p>
+            <p *ngIf="languageoption==='B'" class="mt-1 text-justify" [innerHTML]="itemObj.termsAndConditionBn"></p>
+          </div>
+        </div>
+      </div>
+      <!-- start vedio list -->
+      <div class="video-list mt-5">
+        <div class="video-item video-item-fluid" *ngFor="let item of videosList">
+          <h4>{{item.videoTitle}}</h4>
+          <youtube-player [videoId]="item.youtubeVideoLink" (ready)="savePlayer($event)"
+            (change)="onStateChange($event)">
+          </youtube-player>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <br />
+      <br /><br />
+      <div class="card">
+        <div class="card-body">
+          <div class="phone-box">
+            <div class="row">
+              <div class="phone-number">
+                <p class="ml-3"><strong class="text-danger">Hot Line</strong><br>
+                  <span class="">Call:<strong>+880 28835002</strong></span></p>
+              </div>
+              <div class="contact-logo mr-1">
+                <img src="assets/images/logo/logo.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="input-group input-group-sm mt-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-gray border-right-0">
+                <i class="fa fa-user text-primary"></i>
+              </div>
+            </div>
+            <input type="text" name="cpName" [(ngModel)]="contact.cpName" class="form-control bg-gray border-left-0"
+              placeholder="First Name, Last Name">
+          </div>
+          <div class="input-group input-group-sm mt-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-gray border-right-0">
+                <i class="fa fa-envelope text-primary
+                "></i>
+              </div>
+            </div>
+            <input type="email" name="cpEmail" [(ngModel)]="contact.cpEmail" class="form-control bg-gray border-left-0"
+              placeholder="Your E-mail Address">
+          </div>
+          <div class="input-group input-group-sm mt-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-gray border-right-0">
+                <i class="fa fa-phone text-primary"></i>
+              </div>
+            </div>
+            <input type="text" name="cpMobile" [(ngModel)]="contact.cpMobile" class="form-control bg-gray border-left-0"
+              placeholder="Your Phone Number">
+          </div>
+          <textarea name="cpComments" [(ngModel)]="contact.cpComments" class="form-control bg-gray mt-3"
+            rows="5"></textarea>
+          <button class="btn btn-primary form-control mt-3" (click)="onclickSaveContact()">Contact Property</button>
+        </div>
+      </div>
+      <h5 class="feaured_title mt-5">Featured Property</h5>
+      <div class="flat-item mt-2 " *ngFor="let item of featureItemList">
+        <div class="flat-item-image">
+          <span class="for-sale">{{ item.itemTypeName }}</span>
+          <a [routerLink]="['/product-details', item.itemNo]" (click)="onClickMoreDetail(item.itemNo)">
+            <img [src]="item.itemBrandPhoto" alt="">
+          </a>
+          <div class="flat-link">
+            <a [routerLink]="['/product-details', item.itemNo]" (click)="onClickMoreDetail(item.itemNo)">More
+              Details</a>
+          </div>
+          <ul class="flat-desc">
+            <li *ngIf="item.flatSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.flatSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.plotSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.plotSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.totalPrice">
+              <span> <strong>TK. </strong>{{ item.totalPrice | number : '1.2-2' }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flat-item-info">
+          <div class="flat-title-price">
+            <h5><a [routerLink]="['/product-details', item.itemNo]">{{ item.itemId }} </a></h5>
+            <span class="price"><strong>TK. </strong>{{ item.price }} / {{ item.uomShort }}</span>
+          </div>
+          <p>
+            <img src="assets/images/icons/location.png" alt="">
+            {{item.projectLocation}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>

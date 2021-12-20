@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <h6 class="card-header">Gallery Title</h6>
+          <div class="gallery-trn-list t-list border">
+            <ul class="list-unstyled">
+              <li *ngFor="let gallery of galleryList;let i = index;" (click)="onClickActiveIndex(i)" class="list-item"
+                [class.ui-state-highlight]="i==listActiveIndex">{{gallery.galleryTitle}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-9">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Image Title</label>
+                <input class="form-control form-control-sm" [(ngModel)]="gallery.galleryTitle" name="galleryTitle">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Image Description</label>
+                <textarea class="form-control form-control-sm" rows="20" [(ngModel)]="gallery.galleryDescr"
+                  name="galleryDescr"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-image-warper border">
+            <img [src]="galleryThumbUrl" alt="Gallery Thumb">
+          </div>
+          <label>&nbsp;</label>
+          <input class="form-control-file form-control-sm" ng-model="file_upload" name="multipartThumb" type="file"
+            (change)="galleryThumbChange($event)" #thumbInput>
+            <br>
+          <div class="gallery-image-warper border">
+            <img [src]="galleryPhotoUrl" alt="Gallery Photo">
+          </div>
+          <label>&nbsp;</label>
+          <input class="form-control-file form-control-sm" ng-model="file_upload" name="multipartFile" type="file"
+            (change)="galleryFileChange($event)" #fileInput>
+        </div>
+        <div class="col-md-12">
+          <div class="text-left">
+            <button *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onClickSave()"><i
+                class="fa fa-check"></i>&nbsp;Save</button>
+            <button *ngIf="editMode" class="btn btn-secondary btn-sm ml-1" (click)="onClickNew()"><i
+                class="fa fa-plus"></i>&nbsp;Add New</button>
+            <button *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()"><i
+                class="fa fa-refresh"></i>&nbsp;Update</button>
+            <button *ngIf="editMode" class="btn btn-danger btn-sm m-1" (click)="onClickDelete()"><i
+                class="fa fa-times"></i>&nbsp;Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<nl-popup></nl-popup>

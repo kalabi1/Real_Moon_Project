@@ -1,0 +1,123 @@
+<div class="container">
+  <br>
+  <br>
+  <br />
+  <ul class="nav nav-tabs user-navbar">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="['/profile']">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/edit-profile']">Edit Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/cart']">My Cart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " [routerLink]="['/my-order']">My Order</a>
+    </li>
+  </ul>
+  <br />
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">My Profile</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="slider-wrapper">
+              <div class="customer-photo border">
+                <img *ngIf="customer.customerPictureName" [src]="customerPhotoUrl" alt="My Photo">
+              </div>
+              <div class="text-center">
+                <h4>{{customer.customerName}}</h4>
+              </div>
+              <br>
+              <!-- <button [disabled]="!flat.itemNo" class="btn btn-success btn-sm" (click)="onClickUploadImage()">Upload</button> -->
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <p> <strong>ID:</strong> {{customer.customerId}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Name:</strong> {{customer.customerName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Father name:</strong> {{customer.fatherName}} </p>
+              </div>
+
+
+              <div class="col-md-6">
+                <p> <strong>Mother name:</strong> {{customer.motherName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Permanent Address:</strong> {{customer.permanentAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Present Address:</strong> {{customer.presentAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Spouse name:</strong> {{customer.spouseName}} </p>
+              </div>
+
+              <div class="col-md-6">
+                <p> <strong>Date of Birth:</strong> <span *ngIf="customer.dob">{{customer.dob | date:'d-MMM-y'}}</span> </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>NID/Birth ID/Passport No.:</strong> {{customer.nid}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Nationality:</strong> {{customer.nationalityDisplay}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Mobile:</strong> {{customer.mobile}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>E-mail:</strong> {{customer.email}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Telephone:</strong> {{customer.telephone}} </p>
+              </div>
+              <!-- <div class="col-md-6">
+                <p> <strong>Profession:</strong> {{customer.profession_no}} </p>
+              </div> -->
+              <div class="col-md-6">
+                <p> <strong>Designation:</strong> {{customer.designation}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Office Address:</strong> {{customer.officeAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Contact Person:</strong> {{customer.contactPerson}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Contact Person Mobile:</strong> {{customer.cpMobile}} </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="text-center">
+          <button class="btn btn-primary " [routerLink]="['/edit-profile']">Edit Profile</button>
+        </div>
+
+        <!-- <div class="form-group">
+              <label>Profession<span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="customer.profession_no" name="profession_no">
+                <option *ngFor="let profession of professionList" [value]="profession.lookupdtlNo">
+                  {{ profession.dtlName }}</option>
+              </select> -->
+        <!-- <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.profession_no"
+            name="profession_no"> -->
+
+        <!--/.form-group-->
+
+        <!--/.form-group-->
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

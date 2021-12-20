@@ -1,0 +1,515 @@
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Apartment Item Setup</h6>
+          </div>
+          <div class="col-md-6">
+            <div class="text-right">
+              <a (click)="onClickShowItemSearch()" *ngIf="!itemSearch"><i class="fa fa-arrow-down"></i></a>
+              <a (click)="onClickShowItemSearch()" *ngIf="itemSearch"><i class="fa fa-arrow-up"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr *ngIf="itemSearch">
+        <div class="row " *ngIf="itemSearch">
+          <div class="col-md-5">
+            <ng-select [items]="projectList" bindLabel="projectName" autofocus bindValue="projectNo"
+              name="selectedProjectNo" [(ngModel)]="selectedProjectNo" (change)="onChangeGetItemList()">
+            </ng-select>
+          </div>
+          <div class="col-md-5">
+            <ng-select [items]="itemList" bindLabel="itemId" autofocus bindValue="itemNo" name="itemList"
+              [(ngModel)]="selectedItemNo">
+            </ng-select>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-sm btn-primary" (click)="onChangeGetItemDetails(0)"><i
+                class="fa fa-search"></i></button>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-sm btn-primary" [disabled]="editMode" (click)="onChangeGetItemDetails(1)"><i
+                class="fa fa-clone"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Item No.</label>
+              <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="flat.itemId" name="itemId">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Item Name</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.itemName" name="itemName">
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Name</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.projectNo" name="projectNo"
+                (change)="onChangeProject()">
+                <option *ngFor="let item of projectList" [value]="item.projectNo">{{ item.projectName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Type</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.projectTypeName"
+                name="projectTypeName" readonly>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Status</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.projectStatus"
+                name="projectStatus" readonly>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Location</label>
+              <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="flat.projectLocation"
+                name="projectLocation">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Decoration Condition</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.decorationCondition"
+                name="decorationCondition">
+                <option value="W">Well furnished</option>
+                <option value="N">Non furnished</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Flat Size</label>
+              <input (change)="calculatePrice()" type="text" class="form-control form-control-sm"
+                [(ngModel)]="flat.flatSize" name="flatSize">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>UoM</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.uomNo" name="uomNo">
+                <option *ngFor="let inuom of uomList" [value]="inuom.uomNo">{{ inuom.uomShort }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" [(ngModel)]="flat.descr" name="descr"></textarea>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description (Bangla)</label>
+              <textarea class="form-control" [(ngModel)]="flat.descrBn" name="descrBn"></textarea>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Terms & Conditions</label>
+              <textarea class="form-control" [(ngModel)]="flat.termsAndCondition" name="termsAndCondition"></textarea>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Terms & Conditions (Bangla)</label>
+              <textarea class="form-control" [(ngModel)]="flat.termsAndConditionBn"
+                name="termsAndConditionBn"></textarea>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Storied</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.flatPlaceofStorid"
+                name="flatPlaceofStorid">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Lifts</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.numberOfLift"
+                name="numberOfLift">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Year Of Build</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.builtYear" name="bedRoom">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Bedrooms</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.bedRoom" name="bedRoom">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Living And Dining</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.livingAndDining"
+                name="livingAndDining">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Kitchens</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.kitchen" name="kitchen">
+            </div>
+          </div>
+          <!--/.form-group-->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Balconies</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.numberOfBalcony"
+                name="numberOfBalcony">
+            </div>
+          </div>
+          <!--/.form-group-->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Toilets</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.toilets" name="toilets">
+            </div>
+          </div>
+          <!--/.form-group-->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Swimming Pools</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.swimmingPool"
+                name="swimmingPool">
+            </div>
+          </div>
+          <!--/.form-group-->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Number of Gym</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.gym" name="gym">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Flat Facing</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.facingNo" name="facingNo">
+                <option *ngFor="let item of facingList" [value]="item.facingNo">{{ item.facingName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Parking Area</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.parkingFlag" name="parkingFlag">
+                <option value="1">Available</option>
+                <option value="0">Unavailable</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Parking Price</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.parkingPrice"
+                name="parkingPrice">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Security System</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.securityFlag" name="securityFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>CCTV Control</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.cctvFlag" name="cctvFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Conference Hall</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.conferenceHallFlag"
+                name="conferenceHallFlag">
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Central Heating</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.heatingFlag" name="heatingFlag">
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Central Cooling</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.coolingFlag" name="coolingFlag">
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Internet Facilities</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.internetFlag" name="internetFlag">
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>TV Cable</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.cableTvFlag" name="cableTvFlag">
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Price</label>
+              <input type="text" class="form-control form-control-sm" (change)="calculatePrice()"
+                [(ngModel)]="flat.price" name="price">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Total Price</label>
+              <div class="border-control border">
+                {{ flat.totalPrice | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Discount (%)</label>
+              <input type="text" class="form-control form-control-sm" (change)="calculatePrice()"
+                [(ngModel)]="flat.discountPct" name="discountPct">
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Discount Amount</label>
+              <div class="border-control border">
+                {{ flat.discountAmount | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Net Price</label>
+              <div class="border-control border">
+                {{ flat.netPrice | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Booking Money</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.bookingMoney"
+                name="bookingMoney">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Price Negotiable</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.priceNegotiableFlagFlag"
+                name="priceNegotiableFlag">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Publish Status</label>
+              <select class="form-control form-control-sm" [(ngModel)]="flat.publishFlag" name="publishFlag">
+                <option value="1">Publish</option>
+                <option value="0">Draft</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+        </div>
+        <div class="text-right">
+          <button *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onClickSave()"><i
+              class="fa fa-check"></i>&nbsp;Save</button>
+          <button *ngIf="editMode" class="btn btn-secondary btn-sm" (click)="onClickNew()"><i
+              class="fa fa-plus"></i>&nbsp;Add New</button>
+          <button *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()"><i
+              class="fa fa-refresh"></i>&nbsp;Update</button>
+          <button *ngIf="editMode" class="btn btn-danger btn-sm m-1" (click)="onClickDelete()"><i
+              class="fa fa-times"></i>&nbsp;Delete</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card">
+      <h6 class="card-header">Item Brand Photo</h6>
+      <div class="card-body">
+        <div class="slider-wrapper">
+          <img *ngIf="flat.itemBrandPhoto" [src]="itemBrandPhotoUrl" alt="">
+          <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="itemBrandPhoto" type="file"
+            (change)="changeBrandFile($event)" #fileInput>
+        </div>
+      </div>
+    </div>
+    <!-- Item Brand Photo Upload -->
+    <div class="card mt-2">
+      <h6 class="card-header">Installment Setup</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="table-responsive scroll-4">
+            <table class="table table-bordered table-hover table-sm">
+              <thead class="thead-light">
+                <tr>
+                  <th>SL.NO.</th>
+                  <th> Installment Amount</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let itemInstallment of rlitemInstallmentList; let i = index">
+                  <td>{{ i+1 }}</td>
+                  <td><input type="text" class="form-control form-control-sm"
+                      [(ngModel)]="itemInstallment.installmentAmount" name="itemInstallment-{{i}}"></td>
+                  <td><button class="btn btn-danger btn-sm"
+                      (click)="onClickDeleteRlItemInstallment(itemInstallment.installmentNo, i)"><i
+                        class="fa fa-times"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button [disabled]="!flat.itemNo" class="btn btn-secondary btn-sm mt-2"
+            (click)="onClickAddRlItemInstallment()"><i class="fa fa-plus"></i>&nbsp;Add New</button>
+          <button [disabled]="!flat.itemNo" class="btn btn-primary btn-sm ml-base mt-2 ml-1"
+            (click)="onClickSaveRlItemInstallment()"><i class="fa fa-check"></i>&nbsp;Save</button>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+    <!-- End Rl Item Installment -->
+    <div class="card mt-2">
+      <h6 class="card-header">Video List</h6>
+      <div class="card-body">
+        <div class="video-list">
+          <div class="video-item" *ngFor="let item of videosList">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="float-left">{{item.videoTitle}}</h4>
+                <div class="float-right">
+                  <button class="btn btn-sm btn-danger" (click)="onClickDeleteVideo(item.videoNo, i)"><i
+                      class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-info ml-1" (click)="onClikUpdateFlag(item)"><i
+                      class="fa fa-pencil"></i></button>
+                </div>
+              </div>
+            </div>
+            <youtube-player [videoId]="item.youtubeVideoLink" (ready)="savePlayer($event)"
+              (change)="onStateChange($event)">
+            </youtube-player>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Video Title</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.videoTitle" name="videoTitle">
+        </div>
+        <div class="form-group">
+          <label>YouTube Video Link</label>
+
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="flat.youtubeVideoLink"
+            name="youtubeVideoLink">
+          <button *ngIf="!videoUpdateFlag" [disabled]="!flat.itemNo || !flat.youtubeVideoLink"
+            class="btn btn-success btn-sm mt-2" (click)="onClickSaveVideo()"><i
+              class="fa fa-upload"></i>&nbsp;Upload</button>
+          <button *ngIf="videoUpdateFlag" [disabled]="!flat.itemNo" class="btn btn-success btn-sm mt-2"
+            (click)="onClickUpdateVideo()"><i class="fa fa-pencil"></i>&nbsp;Update Video</button>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <h6 class="card-header">Slider List</h6>
+      <div class="card-body">
+        <div class="slider-wrapper">
+          <div class="slider-list">
+            <div *ngFor="let item of sliderList; let i = index" class="slider-item">
+              <span class="slider-item__delete" (click)="onClickDeleteSlider(item.sliderNo, i)"><i
+                  class="fa fa-times"></i></span>
+              <img [src]="item.imagePath" alt="">
+            </div>
+          </div>
+          <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="multipartFile" type="file"
+            (change)="fileChange($event)" #fileInput2>
+          <button class="btn btn-success btn-sm mt-2" (click)="onClickUploadImage()"
+            [disabled]="!flat.itemNo || !myInputVariable2.nativeElement.value"><i
+              class="fa fa-upload"></i>&nbsp;Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

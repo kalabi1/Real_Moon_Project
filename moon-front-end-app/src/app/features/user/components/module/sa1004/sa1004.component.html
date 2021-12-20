@@ -1,0 +1,89 @@
+<div class="row">
+
+  <!-- Uom Setup -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Lookup Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-12">
+          <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Lookup No</th>
+                <th>Lookup Name</th>
+                <th>Sescr</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [class.bg-light]="i==lookupActiveIndex" *ngFor="let lookup of lookupList; let i = index"
+                (click)="onClickSelectLookup(lookup.lookupNo,i)">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookup.lookupNo"
+                    name="lookupNo-{{i}}"> </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookup.lookupName"
+                    name="lookupName-{{i}}"> </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookup.descr"
+                    name="descr-{{i}}"> </td>
+
+                <td><button class="btn btn-danger btn-sm"
+                    (click)="$event.stopPropagation();onClickDeleteLookup(lookup.lookupNo, i)"><i
+                      class="fa fa-times"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewLookup()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveLookupList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+  <!-- Lookupdtl Information -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Lookupdtl Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-12">
+          <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Lookupdtl No</th>
+                <th>Lookupdtl Name</th>
+                <th>Descr</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [class.bg-light]="i==lookupdtlActiveIndex" (click)="onClickSelectLookupdtl(i)"
+                *ngFor="let lookupdtl of lookupdtlList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookupdtl.lookupdtlNo"
+                    name="lookupdtlNo-{{i}}">
+                </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookupdtl.dtlName"
+                    name="dtlName-{{i}}">
+                </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="lookupdtl.descr"
+                    name="d-{{i}}">
+                </td>
+
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteLookupdtl(lookupdtl.lookupdtlNo, i)"><i
+                      class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewLookupdtl()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveLookupdtlList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

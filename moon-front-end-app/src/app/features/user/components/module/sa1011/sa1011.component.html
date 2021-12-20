@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 class="card-header">Messenger Type</h6>
+            <div class="message-trn-list t-list border">
+              <ul class="list-unstyled">
+                <li *ngFor="let messenger of messengerTypeList;let i = index;" (click)="onClickActiveIndex(i)"
+                  class="list-item" [class.ui-state-highlight]="i==listActiveIndex">{{messenger.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input [(ngModel)]="saMessage.messengerName" class="form-control form-control-sm"
+                    name="messengerName">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Designation</label>
+                  <input [(ngModel)]="saMessage.messengerDesig" class="form-control form-control-sm"
+                    name="messengerDesig">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Massage</label>
+                  <textarea [(ngModel)]="saMessage.message" name="message"
+                    class="form-control form-control-sm textarea-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="employee-image-warper border">
+              <img [src]="messengerPhotoUrl" alt="Employee Photo">
+            </div>
+            <label>&nbsp;</label>
+            <input class="form-control-file form-control-sm" ng-model="file_upload" name="multipartFile" type="file"
+              (change)="messengerFileChange($event)" #fileInput>
+          </div>
+          <div class="col-md-12">
+            <div class="text-left">
+              <button *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickSaveMessage()"><i
+                  class="fa fa-refresh"></i>&nbsp;Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

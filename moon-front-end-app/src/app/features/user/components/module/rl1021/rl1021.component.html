@@ -1,0 +1,217 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h6 class="card-header">Filtering</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-1">
+            <label for="filterCollId">From</label>
+            <input bsDatepicker placeholder="Date"
+              [bsConfig]="{ dateInputFormat: 'DD/MM/YY', showWeekNumbers: false}" type="text"
+              class="form-control form-control-sm" (ngModelChange)="getTrnListFiltering()" [(ngModel)]="filterFromDate"
+              name="filterFromDate" placement="right">
+          </div>
+          <div class="col-md-6 mb-1">
+            <label for="filterCollId">To</label>
+            <input bsDatepicker placeholder="Date"
+              [bsConfig]="{ dateInputFormat: 'DD/MM/YY', showWeekNumbers: false,adaptivePosition: true }" type="text"
+              class="form-control form-control-sm" (ngModelChange)="getTrnListFiltering()" [(ngModel)]="filterToDate"
+              name="filterToDate" placement="right">
+          </div>
+
+          <div class="col-md-12 mb-1">
+            <label for="filterCollId">Collection No</label>
+            <ng-select [items]="rlCollectionList" bindLabel="collId" autofocus bindValue="collNo"
+              name="rlCollectionList" [(ngModel)]="filterCollNo" (change)="getTrnListFiltering()">
+            </ng-select>
+          </div>
+          <div class="col-md-12">
+            <div class="collection-trn-list t-list border">
+              <ul class="list-unstyled">
+                <li *ngFor="let coll of tempTrnFilterList | filter : searchFields : searchString;let i = index;"
+                  (click)="onClickActiveIndex(i)" class="list-item" [class.ui-state-highlight]="i==listActiveIndex">
+                  {{coll.collId}} ( {{coll.collDate|date:'dd/MM/yy'}} )</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-12">Record Count: {{recordCount}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <h6 class="card-header">Sales Collection</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Payment No</label>
+              <input readonly type="text" [(ngModel)]="rlCollection.collId" class="form-control form-control-sm"
+                name="collId">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Payment Date</label>
+              <input bsDatepicker [(ngModel)]="rlCollection.collDate"
+                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" type="text"
+                class="form-control form-control-sm" name="collDate">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Transaction No</label>
+              <ng-select name="trnList" [(ngModel)]="rlCollection.trnNo" autofocus name="trnNo"
+                (change)="getTrnBalanceDetails()">
+                <ng-option *ngFor="let trn of trnList;" [value]="trn.trnNo"> {{ trn.trnId}} - {{ trn.customerName }}
+                </ng-option>
+              </ng-select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Customer Name</label>
+              <input readonly [(ngModel)]="rlCollection.customerName" type="text" class="form-control form-control-sm"
+                name="customerName">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>MR No.</label>
+              <input [(ngModel)]="rlCollection.mrNo" type="text" class="form-control form-control-sm" name="mrNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Ref Trn No.</label>
+              <input [(ngModel)]="rlCollection.refTrnNo" type="text" class="form-control form-control-sm" name="refTrnNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Description</label>
+              <input [(ngModel)]="rlCollection.descr" type="text" class="form-control form-control-sm" name="descr">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Pending Amount</label>
+              <input type="text" readonly [(ngModel)]="rlCollection.dueAmount" class="form-control form-control-sm"
+                name="dueAmount">
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Installment No.<span class="text-danger">*</span></label>
+              <select (change)="getInstallmentDetails()" class="form-control form-control-sm"
+                [(ngModel)]="rlCollection.installmentNo" name="installmentNo" required #installmentNo="ngModel">
+                <option [disabled]="installment.payFlag===1" *ngFor="let installment of rlTrnInstallmentList"
+                  [value]="installment.installmentNo">
+                  Installment {{ installment.installmentSl}} : ( {{installment.installmentAmount | number : '1.2-2'}} Tk
+                  )
+                </option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Installment Amount</label>
+              <div class="border-control border">
+                {{ installmentAmount | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Paid Amount</label>
+              <input [(ngModel)]="rlCollection.paidAmount" type="text" class="form-control form-control-sm"
+                name="paidAmount">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Pay Mode <span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="rlCollection.payMode" name="payMode" required
+                #payMode="ngModel">
+                <option value="C">Cash</option>
+                <option value="CQ">Cheque</option>
+                <option value="D">DD</option>
+                <option value="P">Pay Order</option>
+                <option value="T">TT</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Due Amount</label>
+              <div class="border-control border">
+                {{ installmentAmount-rlCollection.paidAmount | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bank Name</label>
+              <input [(ngModel)]="rlCollection.bankNo" type="text" class="form-control form-control-sm" name="bankNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Branch Name</label>
+              <input [(ngModel)]="rlCollection.branchNo" type="text" class="form-control form-control-sm"
+                name="branchNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Cheque No</label>
+              <input [(ngModel)]="rlCollection.cqNo" type="text" class="form-control form-control-sm" name="cqNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Cheque Date</label>
+              <input [(ngModel)]="rlCollection.cqDate" bsDatepicker
+                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" type="text"
+                class="form-control form-control-sm" name="cqDate">
+            </div>
+            <!--/.form-group-->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <div class="text-right mb-1">
+          <button (click)="onclickSaveCollection()" class="btn btn-primary btn-sm mr-1" *ngIf="!editMode"><i
+              class="fa fa-check"></i>&nbsp;Save</button>
+          <button (click)="onClickAddNew()" class="btn btn-secondary btn-sm" *ngIf="editMode"><i
+              class="fa fa-plus"></i>&nbsp;Add New</button>
+          <button (click)="onclickUpdateCollection()" class="btn btn-success btn-sm ml-1" *ngIf="editMode"><i
+              class="fa fa-refresh"></i>&nbsp;Update</button>
+          <button (click)="onClickDeleteCollection()" class="btn btn-danger btn-sm m-1" *ngIf="editMode"><i
+              class="fa fa-times"></i>&nbsp;Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

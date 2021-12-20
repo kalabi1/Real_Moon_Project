@@ -1,0 +1,387 @@
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <h6 class="card-header">Apartment Project Setup</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project No.</label>
+              <input type="text" readonly class="form-control form-control-sm" [(ngModel)]="plot.projectId"
+                name="projectId">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Name</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.projectName" name="projectName">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Type</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.projectType" name="projectType">
+                <option value="R">Residential</option>
+                <option value="C">Commercial</option>
+                <option value="CO">Condominium</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Status</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.projectStatus" name="projectStatus">
+                <option value="OG">Sale going on</option>
+                <option value="CP">Complete Project</option>
+                <option value="UP">Upcoming Project</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Region</label>
+              <select (change)="onChangeGetSubRegionList()" class="form-control form-control-sm"
+                [(ngModel)]="plot.regionNo" name="regionNo">
+                <option *ngFor="let region of regionList" [value]="region.regionNo">
+                  {{ region.regionName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Project Subregion</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.subregionNo" name="subregionNo">
+                <option *ngFor="let subregion of subregionList" [value]="subregion.subregionNo">
+                  {{ subregion.subregionName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Land Area</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.landArea" name="landArea">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>UoM</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.uomNo" name="uomNo">
+                <option *ngFor="let inuom of uomList" [value]="inuom.uomNo">{{ inuom.uomShort }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Open Space</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.openSpace" name="openSpace">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Project Location</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.projectLocation"
+                name="projectLocation">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Number of Storied</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.noOfStoried" name="noOfStoried">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Number of Lift</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.noOfLift" name="noOfLift">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Facing</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.facingNo" name="facingNo">
+                <option *ngFor="let item of facingList" [value]="item.facingNo">{{ item.facingName }}</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Total Flat</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.noOfFlat" name="noOfFlat">
+            </div>
+
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Car Parking</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.carParking" name="carParking">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Handover Time</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.handOverTime"
+                name="handOverTime" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Power Division</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.powerDivisionAapFlag"
+                name="powerDivisionAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fire & Safety</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.fireAndSafetyAapFlag"
+                name="fireAndSafetyAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Traffic Control Authority</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.trafficControlAuthAapFlag"
+                name="trafficControlAuthAapFlag">
+                <option value="2" selected>On Process</option>
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>City Corporation/Municipality</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.municipalityAapFlag"
+                name="municipalityAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Ward Commissioner/Union Council</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.wordCommAapFlag" name="wordCommAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Police Station</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.policeStationAapFlag"
+                name="policeStationAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>WASA</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.wasaAapFlag" name="wasaAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Civil Aviation</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.civilAviationAapFlag"
+                name="civilAviationAapFlag">
+                <option value="2" selected>On Process</option>
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Department of Environment</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.deptOfEnvAapFlag" name="deptOfEnvAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Gas &amp;Transmission Authority</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.gasAapFlag" name="gasAapFlag">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Publish Status</label>
+              <select class="form-control form-control-sm" [(ngModel)]="plot.publishFlag" name="publishFlag">
+                <option value="1">Publish</option>
+                <option value="0">Draft</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-12">
+            <div class="text-right">
+              <button *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onClickSave()"><i
+                  class="fa fa-check"></i>&nbsp;Save</button>
+              <button *ngIf="editMode" class="btn btn-secondary btn-sm" (click)="onClickNew()"><i
+                  class="fa fa-plus"></i>&nbsp;Add New</button>
+              <button *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()"><i
+                  class="fa fa-refresh"></i>&nbsp;Update</button>
+              <button *ngIf="editMode" class="btn btn-danger btn-sm m-1" (click)="onClickDelete()"><i
+                  class="fa fa-times"></i>&nbsp;Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5 ">
+    <div class="card">
+      <h6 class="card-header">Project Layout</h6>
+      <div class="card-body">
+        <div class="slider-wrapper">
+          <img *ngIf="plot.projectLayoutPhoto" [src]="projectLayoutPhotoUrl" alt="">
+          <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="itemBrandPhoto" type="file"
+            (change)="changeBrandFile($event)" #fileInput>
+        </div>
+      </div>
+    </div>
+    <!-- Item Brand Photo Upload -->
+    <div class="card mt-2">
+      <h6 class="card-header">Video List</h6>
+      <div class="card-body">
+        <div class="video-list">
+          <div class="video-item" *ngFor="let item of videosList; let i = index">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="float-left">{{item.videoTitle}} </h4>
+                <div class="float-right">
+                  <button class="btn btn-sm btn-danger" (click)="onClickDeleteVideo(item.videoNo, i)"><i
+                      class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-info ml-1" (click)="onClikUpdateFlag(item)"><i
+                      class="fa fa-pencil"></i></button>
+                </div>
+              </div>
+            </div>
+            <youtube-player [videoId]="item.youtubeVideoLink" (ready)="savePlayer($event)"
+              (change)="onStateChange($event)">
+            </youtube-player>
+          </div>
+        </div>
+        <div class="form-group mt-2">
+          <label>Video Title</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.videoTitle" name="videoTitle">
+        </div>
+        <div class="form-group mt-2">
+          <label>YouTube Video Link</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="plot.youtubeVideoLink"
+            name="youtubeVideoLink">
+          <button *ngIf="!videoUpdateFlag" [disabled]="!plot.projectNo || !plot.youtubeVideoLink"
+            class="btn btn-success btn-sm mt-2" (click)="onClickSaveVideo()"><i
+              class="fa fa-upload"></i>&nbsp;Upload</button>
+          <button *ngIf="videoUpdateFlag" [disabled]="!plot.projectNo" class="btn btn-success btn-sm mt-2"
+            (click)="onClickUpdateVideo()"><i class="fa fa-pencil"></i>&nbsp;Update Video</button>
+        </div>
+      </div>
+    </div>
+    <!-- Video Slider End -->
+
+    <div class="card mt-2">
+      <h6 class="card-header">Slider List</h6>
+      <div class="card-body">
+        <div class="slider-list">
+          <div *ngFor="let item of sliderList; let i = index" class="slider-item">
+            <span class="slider-item__delete" (click)="onClickDeleteSlider(item.sliderNo, i)"><i
+                class="fa fa-times"></i></span>
+            <img [src]="item.imagePath" alt="">
+          </div>
+        </div>
+        <input class="form-control-file form-control-sm mt-2" ng-model="file_upload" name="multipartFile" type="file"
+          (change)="fileChange($event)" #fileInput2>
+        <button class="btn btn-success btn-sm mt-2" (click)="onClickUploadImage()"
+          [disabled]="!plot.projectNo || !myInputVariable2.nativeElement.value"><i
+            class="fa fa-upload"></i>&nbsp;Upload</button>
+      </div>
+    </div>
+    <!-- Slider List End -->
+
+    <div class="card mt-2">
+      <h6 class="card-header">Size Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Type </th>
+                <th>Size</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of sizeList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>
+                  <select class="form-control form-control-sm" [(ngModel)]="item.flatType" name="flatType-{{i}}">
+                    <option *ngFor="let item of atozList" [value]="item.VALUE">{{ item.TEXT }}</option>
+                  </select>
+                </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="item.flatSize"
+                    name="flatSize-{{i}}"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteSize(item.sizeNo, i)"><i
+                      class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button [disabled]="!plot.projectNo" class="btn btn-secondary btn-sm mr-1 mt-2" (click)="onClickAddDetails()"><i
+            class="fa fa-plus"></i>&nbsp;Add New</button>
+        <button [disabled]="!plot.projectNo" class="btn btn-primary btn-sm  mt-2" (click)="onClickSaveDetails()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<nl-popup></nl-popup>

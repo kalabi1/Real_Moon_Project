@@ -1,0 +1,171 @@
+<br />
+<div class="slider-wrapper">
+  <div>
+    <carousel [interval]="myInterval">
+      <slide *ngFor="let item of sliderList; let i = index" class="cutomer-lider-item">
+        <img [src]="item.imagePath" alt="first slide" style="display: block; width: 100%;">
+      </slide>
+    </carousel>
+
+  </div>
+</div>
+<!-- FIND HOME AREA START -->
+<div class="find-home-area bg-blue call-to-bg plr-140 pt-60 pb-20">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-12">
+        <div class="section-title text-white">
+          <h3>FIND YOUR</h3>
+          <h2>HOME HERE</h2>
+        </div>
+      </div>
+      <div class="col-md-9 col-xs-12">
+        <div class="find-homes">
+          <br /><br />
+          <div class="row">
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <select class="form-control  form-control-sm input-background-control find-home-item-select"
+                  name="itemTypeNo" [(ngModel)]="itemTypeNo" (change)="onClickSearch()">
+                  <option value="" disabled>Select Item</option>
+                  <option value="">All</option>
+                  <option value="2">Apartment</option>
+                  <option value="1">Plot</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <select (change)="onChangeGetSubRegionList()"
+                  class="form-control form-control-sm input-background-control find-home-item-select"
+                  [(ngModel)]="regionNo" name="regionNo" (change)="onClickSearch()">
+                  <option value="" disabled>Select Region</option>
+                  <option *ngFor="let region of regionList" [value]="region.regionNo">
+                    {{ region.regionName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <select class="form-control form-control-sm input-background-control find-home-item-select"
+                  [(ngModel)]="subregionNo" name="subregionNo" (change)="onClickSearch()">
+                  <option value="" disabled>Select Sub Region</option>
+                  <option *ngFor="let subregion of subregionList" [value]="subregion.subregionNo">
+                    {{ subregion.subregionName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <select (change)="onClickSearch()" [(ngModel)]="projectType" name="projectType"
+                  class="form-control form-control-sm input-background-control find-home-item-select">
+                  <option value="" disabled>Select Type</option>
+                  <option value="">All</option>
+                  <option value="R">Residential</option>
+                  <option value="C">Commercial</option>
+                  <option value="CO">Condominium</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <select (change)="onClickSearch()" [(ngModel)]="projectStatus" name="projectStatus"
+                  class="form-control form-control-sm input-background-control find-home-item-select">
+                  <option value="" disabled>Select Status</option>
+                  <option value="">All</option>
+                  <option value="OG">Sales going on</option>
+                  <option value="CP">Complete Project</option>
+                  <option value="UP">Upcoming Project</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <input type="text" class="form-control form-control-sm input-background-control"
+                  placeholder="Min Area (sqft/%)" name="minArea" [(ngModel)]="minArea">
+              </div>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item">
+                <input type="text" class="form-control form-control-sm input-background-control"
+                  placeholder="Max Area (sqft/%)" name="maxArea" [(ngModel)]="maxArea">
+              </div>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+              <div class="find-home-item mb-0-xs">
+                <button type="button" class="btn btn-lg button-1 btn-hover-1 " (click)="onClickSearch()"><i
+                    class="fa fa-search"></i> SEARCH</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="marque-control">
+  <div class="row marque-position">
+    <div class="col-md-1 col-sm-1 marque-title-bg">
+      <h3 class="marque-title">News:</h3>
+    </div>
+    <div class="col-md-11 col-sm-11 marque-text-item-control">
+      <div class="marque-text-item">
+        <marquee class="matque-text-control" behavior="scrolling" direction="left" onmouseover="this.stop()"
+          onmouseout="this.start()">{{company.companyLatestNews}}</marquee>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIND HOME AREA END -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"
+      *ngFor="let item of itemList | paginate: { itemsPerPage: 9, currentPage: curPage }">
+      <div class="flat-item">
+        <div class="flat-item-image">
+          <span class="for-sale">{{ item.itemTypeName }}</span>
+          <a [routerLink]="['/product-details', item.itemNo]">
+            <img [src]="item.itemBrandPhoto" alt="Item Brand">
+          </a>
+          <div class="flat-link">
+            <a [routerLink]="['/product-details', item.itemNo]">More Details</a>
+          </div>
+          <ul class="flat-desc">
+            <li *ngIf="item.flatSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.flatSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.plotSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.plotSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.totalPrice">
+              <span> <strong>TK. </strong>{{ item.totalPrice | number : '1.2-2' }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flat-item-info">
+          <div class="flat-title-price">
+            <h5><a [routerLink]="['/product-details', item.itemNo]">{{ item.itemId }} </a></h5>
+            <span class="price"><strong>TK. </strong>{{ item.price }} / {{ item.uomShort }}</span>
+          </div>
+          <p>
+            <img src="assets/images/icons/location.png" alt="">
+            {{item.projectLocation}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="text-center">
+    <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+  </div>
+  <br>
+</div>

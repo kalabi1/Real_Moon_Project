@@ -1,0 +1,229 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h6 class="card-header">Filtering</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-1">
+            <label>From</label>
+            <input bsDatepicker placeholder="Date" [bsConfig]="{ dateInputFormat: 'DD/MM/YY', showWeekNumbers: false}"
+              type="text" class="form-control form-control-sm" (ngModelChange)="getTrnListFiltering()"
+              [(ngModel)]="filterFromDate" name="filterFromDate" placement="right">
+          </div>
+          <div class="col-md-6 mb-1">
+            <label>To</label>
+            <input bsDatepicker placeholder="Date"
+              [bsConfig]="{ dateInputFormat: 'DD/MM/YY', showWeekNumbers: false,adaptivePosition: true }" type="text"
+              class="form-control form-control-sm" (ngModelChange)="getTrnListFiltering()" [(ngModel)]="filterToDate"
+              name="filterToDate" placement="right">
+          </div>
+          <div class="col-md-12 mb-1 mt-1">
+            <label>Voucher Type</label>
+            <ng-select autofocus name="voucherTypeList" [(ngModel)]="filterVTypeNo" (change)="getTrnListFiltering()">
+              <ng-option *ngFor="let vType of voucherTypeList;" [value]="vType.vtypeNo"> {{ vType.typeName}} (
+                {{ vType.alias}} )
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-md-12 mb-1 mt-1">
+            <label>Voucher No</label>
+            <ng-select autofocus name="acVoucherList" [(ngModel)]="filterVnoNo" (change)="getTrnListFiltering()">
+              <ng-option *ngFor="let voucher of acVoucherList;" [value]="voucher.vno"> {{ voucher.vid}} (
+                {{ voucher.vdate |date:'dd/MM/yy'}} )
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-md-12">
+            <div class="voucher-trn-list t-list border">
+              <ul class="list-unstyled">
+                <li
+                  *ngFor="let voucherFilter of acVoucherFilterList | filter : searchFields : searchString;let i = index;"
+                  (click)="onClickActiveIndex(i)" class="list-item" [class.ui-state-highlight]="i==listActiveIndex">
+                  {{voucherFilter.vid}} ( {{voucherFilter.vdate|date:'dd/MM/yy'}} )</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-12">Record Count: {{recordCount}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <h6 class="card-header">Voucher</h6>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <button type="button" class="btn btn-secondary btn-sm mt-1">&nbsp;Period&nbsp;</button>
+                        </div>
+                        <!--/.form-group-->
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <input bsDatepicker [bsConfig]="{
+                        dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" type="text" [isDisabled]="disabled"
+                            class="form-control form-control-sm" [(ngModel)]="acPeriod.startPeriodDate"
+                            name="startPeriodDate">
+                        </div>
+                        <!--/.form-group-->
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <input [isDisabled]="disabled" bsDatepicker [bsConfig]="{
+                        dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" type="text"
+                            class="form-control form-control-sm" [(ngModel)]="acPeriod.endPeriodDate"
+                            name="endPeriodDate">
+                        </div>
+                        <!--/.form-group-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Voucher No</label>
+                      <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="acVoucher.vid"
+                        name="vid">
+                    </div>
+                    <!--/.form-group-->
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Date</label>
+                      <input type="text" class="form-control form-control-sm" [(ngModel)]="acVoucher.vdate" name="vdate"
+                        bsDatepicker [bsConfig]="{
+              dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+                    </div>
+                    <!--/.form-group-->
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Voucher Type</label>
+                      <ng-select [items]="voucherTypeList" bindLabel="typeName" autofocus bindValue="vtypeNo"
+                        name="voucherTypeList" [(ngModel)]="acVoucher.vtypeNo">
+                      </ng-select>
+                    </div>
+                    <!--/.form-group-->
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Module</label>
+                      <input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="acVoucher.moduleName" name="moduleName">
+                    </div>
+                    <!--/.form-group-->
+                  </div>
+                  <div class="col-md-1">
+                    <div class="form-group">
+                      <label>&nbsp;</label>
+                      <button type="button" (click)="generatePdf('PR')"
+                        class="btn btn-secondary btn-sm ">&nbsp;Preview&nbsp;</button>
+                    </div>
+                    <!--/.form-group-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h6 class="float-left">Details</h6>
+        <span (click)="onClickAddDetails()" class="float-right"><i class="fa fa-plus"></i></span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-wrapper">
+              <table class="table table-layout-fixed table-striped table-bordered table-hover table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Cr/Dr</th>
+                    <!-- <th>Acc Code</th> -->
+                    <th>Acc Name</th>
+                    <th>Narration</th>
+                    <th>Dr</th>
+                    <th>Cr</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let voucherdtl of acVoucherdtlList; let i = index">
+                    <td class="w10">
+                      <select [(ngModel)]="voucherdtl.type" class="form-control form-control-sm" name="type">
+                        <option value="Dr">Dr</option>
+                        <option value="Cr">Cr</option>
+                      </select></td>
+                    <td class="w30">
+                      <ng-select autofocus name="acChartList" [(ngModel)]="voucherdtl.accNo">
+                        <ng-option *ngFor="let chart of acChartList;" [value]="chart.accNo"> {{ chart.accName}}
+                          {{ chart.accCode}}
+                        </ng-option>
+                      </ng-select>
+                    </td>
+                    <td class="w10">
+                      <input type="text" [(ngModel)]="voucherdtl.narration" name="dr-i"
+                        class="form-control form-control-sm">
+                    </td>
+                    <td class="w15">
+                      <input type="text" [readonly]="voucherdtl.type==='Cr'" (keyup)="sumDrCrValue()"
+                        [(ngModel)]="voucherdtl.dr" name="dr-i" class="form-control form-control-sm">
+                    </td>
+                    <td class="w15">
+                      <input type="text" [(ngModel)]="voucherdtl.cr" (keyup)="sumDrCrValue()"
+                        [readonly]="voucherdtl.type==='Dr'" name="cr-i" class="form-control form-control-sm">
+                    </td>
+                    <td class="w2"><button class="btn btn-light btn-sm"
+                        (click)="onClickDeleteAcVoucherdtl(voucherdtl.vdtlNo, i)"><i class="fa fa-times"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row justify-content-start">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class=""><strong>In word:</strong> {{drSpellOut}}.</div>
+                </div>
+              </div>
+              <div class="col-md-6 text-right">
+                <div class="form-group">
+                  <div class=""><strong>Total:</strong> {{sumDr| number : '1.2-2'}} (Dr) &nbsp;&nbsp;&nbsp;&&nbsp;&nbsp;
+                    {{sumCr| number : '1.2-2'}} (Cr)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Narration</label>
+      <textarea [(ngModel)]="acVoucher.narration" rows="2" class="form-control form-control-sm"></textarea>
+    </div>
+    <div class="col-md-12">
+      <div class="text-right">
+        <button type="button" *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onclickSaveAcVoucher()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+        <button type="button" *ngIf="editMode" class="btn btn-secondary btn-sm" (click)="onClickAddNew()"><i
+            class="fa fa-plus"></i>&nbsp;Add New</button>
+        <button type="button" *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onclickUpdateAcVoucher()"><i
+            class="fa fa-refresh"></i>&nbsp;Update</button>
+        <button type="button" *ngIf="editMode" class="btn btn-danger btn-sm m-1" (click)="onClickDeleteAcVoucher()"><i
+            class="fa fa-times"></i>&nbsp;Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

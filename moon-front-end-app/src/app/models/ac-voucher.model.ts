@@ -1,0 +1,87 @@
+export class AcVoucher {
+    vno: number;
+    vid: string;
+    vtypeNo: number;
+    narration: string;
+    postFlag: number;
+    opPeriodno: number;
+    vdate: Date;
+    module: string;
+    moduleName: string;
+    voidFlag: string;
+    checkFlag: number;
+    checkBy: number;
+    checkDate: Date;
+    postBy: number;
+    postDate: Date;
+    fileExt: string;
+    fileSize: number;
+    attachFileName: string;
+    attachFileNo: number;
+    oldVDate: Date;
+    otherSrcJournal: number;
+    companyNo: number;
+    ssUploadedOn: string;
+    qjNo: number;
+    mcqjVNo: number;
+    ssIsDeleted: number;
+    ssIsUploaded: number;
+    grpVId: string;
+    paidTo: number;
+    receiveFrom: number;
+    ananVId: string;
+    refVNo: number;
+    preparedBy: string;
+    checkedBy: string;
+    postedBy: string;
+    typeName: string;
+    ssCreator: number;
+    ssCreatedOn: Date;
+    ssModifier: number;
+    ssModifiedOn: Date;
+
+    constructor(options: any = {}) {
+        this.vno = options.vno || null;
+        this.vid = options.vid || '';
+        this.vtypeNo = options.vtypeNo || null;
+        this.narration = options.narration || '';
+        this.postFlag = options.postFlag || null;
+        this.opPeriodno = options.opPeriodno || null;
+        this.vdate = options.vdate ? new Date(options.vdate) : null;
+        this.module = options.module || '';
+        this.voidFlag = options.voidFlag || '';
+        this.checkFlag = options.checkFlag || null;
+        this.checkBy = options.checkBy || null;
+        this.checkDate = options.checkDate ? new Date(options.checkDate) : null;
+        this.postBy = options.postBy || null;
+        this.postDate = options.postDate ? new Date(options.postDate) : null;
+        this.fileExt = options.fileExt || '';
+        this.fileSize = options.fileSize || null;
+        this.attachFileName = options.attachFileName || '';
+        this.attachFileNo = options.attachFileNo || null;
+        this.oldVDate = options.oldVDate ? new Date(options.oldVDate) : null;
+        this.otherSrcJournal = options.otherSrcJournal || null;
+        this.companyNo = options.companyNo || null;
+        this.ssUploadedOn = options.ssUploadedOn || '';
+        this.qjNo = options.qjNo || null;
+        this.mcqjVNo = options.mcqjVNo || null;
+        this.ssIsDeleted = options.ssIsDeleted || null;
+        this.ssIsUploaded = options.ssIsUploaded || null;
+        this.grpVId = options.grpVId || '';
+        this.paidTo = options.paidTo || null;
+        this.receiveFrom = options.receiveFrom || null;
+        this.ananVId = options.ananVId || '';
+        this.refVNo = options.refVNo || null;
+        this.preparedBy = options.preparedBy || '';
+        this.checkedBy = options.checkedBy || '';
+        this.postedBy = options.postedBy || '';
+        this.typeName = options.typeName || '';
+        this.moduleName = options.moduleName || '';
+        this.ssCreator = options.ssCreator || null;
+        this.ssCreatedOn = options.ssCreatedOn ? new Date(options.ssCreatedOn) : null;
+        this.ssModifier = options.ssModifier || null;
+        this.ssModifiedOn = options.ssModifiedOn ? new Date(options.ssModifiedOn) : null;
+
+
+    }
+}

@@ -1,0 +1,18 @@
+/* massage cad css */
+.phone-box{
+    padding: 5px;
+    margin: 5px;;
+}
+.phone-number{
+    width: 60%;
+}
+.contact-logo{
+    width:35%;
+    position: relative;
+    float: right;
+}
+.contact-logo img{
+    height:40px;
+    width: 100px;
+
+}

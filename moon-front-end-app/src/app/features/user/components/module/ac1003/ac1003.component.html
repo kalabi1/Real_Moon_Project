@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <h6 class="card-header">Period</h6>
+          <div class="card-body">
+            <table class="table table-bordered table-hover table-sm ">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">SL#</th>
+                  <th scope="col">Start Period</th>
+                  <th scope="col">End Period</th>
+                  <th scope="col">Close</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let period of acPeriodList; let i=index">
+                  <td>{{period.periodNo }}</td>
+                  <td><input bsDatepicker [bsConfig]="{
+                      dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" [(ngModel)]="period.startPeriodDate"
+                      type="text" name="startPeriodDate-i" class="form-control form-control-sm">
+                  </td>
+
+                  <td><input bsDatepicker [bsConfig]="{
+                      dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" type="text"
+                      [(ngModel)]="period.endPeriodDate" name="endPeriodDate-i" class="form-control form-control-sm">
+                  </td>
+                  <td><button class="btn btn-secondary btn-sm">Close</button></td>
+                  <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteAcPeriod(period.periodNo, i)"><i
+                        class="fa fa-times"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewAcPeriod()"><i
+                class="fa fa-plus"></i>&nbsp;Add
+              New</button>
+            <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveAcPeriodList()"><i
+                class="fa fa-check"></i>&nbsp;Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

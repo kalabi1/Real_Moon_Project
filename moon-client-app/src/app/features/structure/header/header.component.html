@@ -1,0 +1,106 @@
+<!-- HEADER AREA START -->
+<header class="header-area header-wrapper">
+  <div class="header-top-bar bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="logo">
+            <a [routerLink]="['/']">
+              <img [src]="companyLogoUrl" alt="Logo">
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 hidden-sm hidden-xs">
+          <div class="company-info clearfix">
+            <div class="company-info-item">
+              <div class="header-icon">
+                <img src="assets/images/icons/phone.png" alt="">
+              </div>
+              <div class="header-info">
+                <h6>{{company.companyPhone}}</h6>
+                <h6>{{company.companyMobile}}</h6>
+                <p>{{company.officeTime}}</p>
+              </div>
+            </div>
+            <div class="company-info-item">
+              <div class="header-icon">
+                <img src="assets/images/icons/mail-open.png" alt="">
+              </div>
+              <div class="header-info">
+                <h6><a [href]="'mailto:'+company.companyEmail" class="text-dark">{{company.companyEmail}}</a>
+                </h6>
+                <p>You can mail us</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 ">
+          <div class="row">
+            <div class="col-md-4 col-sm-4 col mt-2">
+              <button class="btn btn-sm bg-primary rounded-pill mt-2 text-white" [routerLink]="['/cart']">
+                <span><i class="fa fa-cart-plus"></i> Cart
+                  <span class="badge badge-light ml-1" id="totalCart">{{ totalCartItem }}</span></span>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-4 col mt-2">
+              <div class="mt-2" *ngIf="!isLoged">
+                <a [routerLink]="['/login']" class="btn btn-sm btn-primary rounded-pill">Login</a>
+              </div>
+              <div class="dropdown user-profile-icon-wrapper" *ngIf="isLoged">
+                <a (click)="onClickOpenProfileMenu()" class="user-profile-icon d-flex align-items-center ml-2">
+                  <img [src]="customerPictureName" class="rounded-circle" alt="">
+                </a>
+                <div [ngClass]="profilMenuExpan?'dropdown-menu show':'dropdown-menu'">
+                  <p class="dropdown-item  mb-0 border-bottom">{{ customerId }}</p>
+                  <a class="dropdown-item" [routerLink]="['/profile']" (click)="onClickOpenProfileMenu()">My Profile</a>
+                  <a class="dropdown-item" [routerLink]="['/edit-profile']" (click)="onClickOpenProfileMenu()">Edit
+                    Profile</a>
+                  <a class="dropdown-item" [routerLink]="['/my-order']" (click)="onClickOpenProfileMenu()">My Order</a>
+                  <a class="dropdown-item" [routerLink]="['/cart']" (click)="onClickOpenProfileMenu()">My Cart</a>
+                  <a class="dropdown-item cursor-pointer" (click)="onClickLogOut()">Logout</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="sticky-header" class="header-middle-area  transparent-header hidden-xs">
+    <div class="container">
+      <div class="full-width-mega-drop-menu">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="sticky-logo">
+              <a [routerLink]="['/user']">
+                <img src="assets/images/logo/logo.png" alt="">
+              </a>
+            </div>
+            <nav id="primary-menu" class="text-center">
+              <ul class="main-menu mb-0">
+                <li><a [routerLink]="['/']">Home</a></li>
+                <li><a [routerLink]="['/project-list']">Projects</a>
+                  <ul class="drop-menu">
+                    <li><a (click)="onClickReload(1)" [routerLink]="['/project-list',2]">Apartment</a></li>
+                    <li><a (click)="onClickReload(2)" [routerLink]="['/project-list-plot',1]">Plot</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Messages</a>
+                  <ul class="drop-menu">
+                    <li><a [routerLink]="['/message-chairman']">Chairman Message</a></li>
+                    <li><a [routerLink]="['/managing-director-chairman']">Managing Director Message</a></li>
+                    <li><a [routerLink]="['/director-chairman']">Director Message</a></li>
+                  </ul>
+                </li>
+                <li><a [routerLink]="['/gallery']">Gallery</a></li>
+                <li><a [routerLink]="['/contact']">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- HEADER AREA END -->

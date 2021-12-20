@@ -1,0 +1,27 @@
+<br /><br /><br />
+<section id="page-content" class="page-wrapper">
+    <div class="section-title-2 text-center ">
+        <h2>Gallery</h2>
+    </div>
+    <br>
+    <!-- FEATURED FLAT AREA START -->
+    <div class="featured-flat-area pb-60">
+        <div class="container">
+            <div class="mixitup-grid row" id="image-popups">
+                <div class="col-md-4 mix filter2 " *ngFor="let gallery of galleryList">
+                    <div class="gallery-warper">
+                        <img [src]="gallery.galleryThumbName" alt="Gallery Photo">
+
+                        <h4 class="mt-3"> <a
+                                [routerLink]="['/gallery-details', gallery.galleryNo]">{{ gallery.galleryTitle }}</a>
+                        </h4>
+                        <p class="gallery-descr-control" [innerHtml]="gallery.galleryDescr"></p>
+
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+    <!-- FEATURED FLAT AREA END -->
+</section>

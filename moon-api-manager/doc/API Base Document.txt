@@ -1,0 +1,8 @@
+mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
+
+
+Swager API UI
+http://localhost:8080/nahal/v1/swagger-ui.html
+
+// ojdbc install
+install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle  -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar

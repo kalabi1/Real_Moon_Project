@@ -1,0 +1,297 @@
+<form #customerForm="ngForm" novalidate>
+  <div class="row">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-3">Customer Information</div>
+          <div class="col-md-7"></div>
+          <div class="col-md-2">
+            <div class="btn-group ml-3" role="group" aria-label="Basic example">
+              <button (click)="generatePdf('PR')" class="btn btn-secondary btn-sm"><i
+                  class="fa fa-file-pdf-o"></i></button>
+              <button (click)="generatePdf('D')" class="btn btn-secondary btn-sm"><i
+                  class="fa fa-download"></i></button>
+              <button (click)="generatePdf('P')" class="btn btn-secondary btn-sm"><i class="fa fa-print"
+                  aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Customer ID</label>
+                  <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="customer.customerId"
+                    name="customerId">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Customer Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.customerName"
+                    name="customerName" required #customerName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="customerName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                  <!--/.error-->
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Father's Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.fatherName"
+                    name="fatherName" required #fatherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="fatherName.invalid && (fatherName.dirty || fatherName.touched)" class="alert alert-danger">
+                    <div *ngIf="fatherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mother's Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.motherName"
+                    name="motherName" required #motherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="motherName.invalid && (motherName.dirty || motherName.touched)" class="alert alert-danger">
+                    <div *ngIf="motherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Permanent Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.permanentAddress"
+                    name="permanentAddress" required #permanentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="permanentAddress.invalid && (permanentAddress.dirty || permanentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="permanentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Present Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.presentAddress"
+                    name="presentAddress" required #presentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="presentAddress.invalid && (presentAddress.dirty || presentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="presentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                  <div class="form-check d-flex">
+                    <input type="checkbox" id="exampleCheck1" (change)="onChangeAddressCheckbox()"
+                      [(ngModel)]="sameAsPresentAddress" name="sameAsPresentAddress">
+                    <label class="form-check-label" for="exampleCheck1"><small>Same with Permanent
+                        Address?</small></label>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Spouse's Name</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.spouseName"
+                    name="spouseName">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date Of Birth</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.dob" name="dob"
+                    bsDatepicker [bsConfig]="{
+                      dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>NID/Birth ID/Passport No. <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.nid" name="nid" required
+                    #nid="ngModel">
+                  <div class="validation-error-class-wrapper" *ngIf="nid.invalid && (nid.dirty || nid.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nid.errors.required">
+                      ID is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Religion</label>
+                  <select class="form-control form-control-sm" [(ngModel)]="customer.religionName" name="religionName">
+                    <option value="M">Muslim</option>
+                    <option value="H">Hindu</option>
+                    <option value="O">Others</option>
+                  </select>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nationality <span class="text-danger">*</span></label>
+                  <select class="form-control form-control-sm" [(ngModel)]="customer.nationality" name="nationality"
+                    required #nationality="ngModel">
+                    <option *ngFor="let country of countryList" [value]="country.VALUE">{{ country.TEXT }}</option>
+                  </select>
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nationality.invalid && (nationality.dirty || nationality.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nationality.errors.required">
+                      Nationality is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Telephone No.</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.telephone"
+                    name="telephone">
+                </div>
+                <!--/.form-group-->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="slider-wrapper">
+              <div class="customer-photo border">
+                <img [src]="sliderUrl" alt="Customer Photo">
+              </div>
+              <label>&nbsp;</label>
+              <input class="form-control-file form-control-sm" ng-model="file_upload" name="multipartFile" type="file"
+                (change)="fileChange($event)" #fileInput>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Mobile No. <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.mobile" name="mobile"
+                required #mobile="ngModel">
+              <div class="validation-error-class-wrapper" *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+                class="alert alert-danger">
+                <div *ngIf="mobile.errors.required">
+                  Mobile number is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>E-mail Address</label>
+              <input type="email" class="form-control form-control-sm" [(ngModel)]="customer.email" name="email">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person's Name</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.contactPerson"
+                name="contactPerson">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person's Mobile</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.cpMobile" name="cpMobile">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person's Address</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.cpAddress" name="cpAddress">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person's E-mail</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.cpEmail" name="cpEmail">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Profession<span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="customer.profession_no" name="profession_no"
+                required #profession_no="ngModel">
+                <option *ngFor="let profession of professionList" [value]="profession.lookupdtlNo">
+                  {{ profession.dtlName }}</option>
+              </select>
+              <div class="validation-error-class-wrapper"
+                *ngIf="profession_no.invalid && (profession_no.dirty || profession_no.touched)"
+                class="alert alert-danger">
+                <div *ngIf="profession_no.errors.required">
+                  Profession number is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Designation</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.designation"
+                name="designation">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Office Address</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.officeAddress"
+                name="officeAddress">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="text-right">
+              <button type="button" *ngIf="!editMode" class="btn btn-primary btn-sm" (click)="onClickSave()"><i
+                  class="fa fa-check"></i>&nbsp;Save</button>
+              <button type="button" *ngIf="editMode" class="btn btn-secondary btn-sm" (click)="onClickNew()"><i
+                  class="fa fa-plus"></i>&nbsp;Add New</button>
+              <button type="button" *ngIf="editMode" class="btn btn-success btn-sm ml-1" (click)="onClickUpdate()"><i
+                  class="fa fa-refresh"></i>&nbsp;Update</button>
+              <button type="button" *ngIf="editMode" class="btn btn-danger btn-sm m-1"
+                (click)="onClickDeleteCustomer()"><i class="fa fa-times"></i>&nbsp;Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<nl-popup></nl-popup>

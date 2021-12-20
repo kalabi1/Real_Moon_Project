@@ -1,0 +1,63 @@
+<br>
+<br>
+<br>
+<div class="container">
+  <ul class="nav nav-tabs user-navbar">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/edit-profile']">Edit Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/cart']">My Cart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="['/my-order']">My Order</a>
+    </li>
+  </ul>
+  <br>
+  <div class="card">
+    <h6 class="card-header">Order List</h6>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm table-hover table-bordered table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>Serial</th>
+              <th>Order No</th>
+              <th>Order Date</th>
+              <th>Order Status</th>
+              <th>Item Name</th>
+              <th>Item Type</th>
+              <th>Settlement Price</th>
+              <th>Booking Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trn of customerTrnList; let i = index;">
+              <td>{{ i+1 }}</td>
+              <td><a [routerLink]="['/order-info', trn.trnNo]">{{ trn.trnId }}</a></td>
+              <td>{{ trn.trnDate | date:'d-MMM-y'}}</td>
+              <td> {{trn.approveFlagName}} </td>
+              <td>{{ trn.itemName }} ({{ trn.itemId }})</td>
+              <td>{{ trn.itemTypeName }}</td>
+              <td>
+                <div class="text-right">{{ trn.settlementPrice }}</div>
+              </td>
+              <td>
+                <div class="text-right">{{ trn.bookingAmount }}</div>
+              </td>
+              <td>
+                <div class="text-center">
+                  <a [routerLink]="['/order-info', trn.trnNo]"><i class="fa fa-eye fa-lg"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

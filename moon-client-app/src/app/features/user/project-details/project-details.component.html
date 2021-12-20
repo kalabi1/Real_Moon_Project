@@ -1,0 +1,176 @@
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h4>{{ projectObj.projectName }}<span> ({{ projectObj.projectId }})</span></h4>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+  <div class="project-layout-photo">
+    <img [src]="projectPhoto" alt="Project Layout Photo">
+  </div>
+  <br><br>
+  <div class="border p-3" *ngIf="projectObj.projectTypeNo=='1'">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="text-center mb-2">
+          <h5>Plot Status</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-right">
+          <span><i class="fa fa-square text-success"></i>&nbsp;Available</span>&nbsp;&nbsp;
+          <span><i class="fa fa-square text-warning"></i>&nbsp;Booked</span>&nbsp;&nbsp;
+          <span><i class="fa fa-square text-danger"></i>&nbsp;Sold Out</span>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-responsive">
+      <div *ngFor="let item of itemList">
+        <a class="btn ml-1 btn-control-plotbooking" [routerLink]="['/product-details', item.itemNo]"
+          [class.btn-danger]="item.itemInventoryFlag===1" [class.btn-warning]="item.itemInventoryFlag===4"
+          [class.btn-success]="!item.itemInventoryFlag">{{ item.plotNo }}</a>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="text-center">
+    <h5>Project Details</h5>
+  </div>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-md-12 " *ngIf="projectObj.projectLocation">
+      <p *ngIf="projectObj.projectLocation"><strong>Project Location :</strong> {{ projectObj.projectLocation }}</p>
+    </div>
+    <div class="col-md-4" *ngIf="projectObj.projectType">
+      <p *ngIf="projectObj.projectType"><strong>Project Type :</strong> {{ projectObj.projectType }}</p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.approvalId">
+      <p *ngIf="project.projectStatus">
+        <strong>Project Status :</strong> {{project.projectStatus}}
+      </p>
+    </div>
+    <div class="col-md-4" *ngIf="projectObj.facingNo">
+      <p *ngIf="projectObj.facingNo"><strong>Facing :</strong> {{ projectObj.facingName }}</p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.noOfFlat">
+      <p *ngIf="projectObj.noOfFlat"><strong>Total Flat :</strong> {{ projectObj.noOfFlat }}</p>
+    </div>
+
+    <div class="col-md-4" *ngIf="projectObj.landArea">
+      <p *ngIf="projectObj.landArea"><strong>Land Area :</strong> {{ projectObj.landArea }} {{ projectObj.uomShort }}
+      </p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.noOfStoried">
+      <p *ngIf="projectObj.noOfStoried"><strong>Storied :</strong> {{ projectObj.noOfStoried }}</p>
+    </div>
+    <div class="col-md-4" *ngIf="projectObj.noOfLift">
+      <p *ngIf="projectObj.noOfLift"><strong>Total Lift :</strong> {{ projectObj.noOfLift }}</p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.openSpace">
+      <p *ngIf="projectObj.openSpace"><strong>Open Space :</strong> {{ projectObj.openSpace }} %</p>
+    </div>
+    <div class="col-md-4" *ngIf="projectObj.carParking">
+      <p *ngIf="projectObj.carParking"><strong>Car Parking :</strong> {{ projectObj.carParking }}</p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.blockNameFrom">
+      <p *ngIf="projectObj.blockNameFrom"><strong>Block :</strong> {{ projectObj.blockNameFrom }} to
+        {{ projectObj.blockNameTo }}</p>
+    </div>
+    <div class="col-md-4 " *ngIf="projectObj.plotSize">
+      <p *ngIf="projectObj.plotSize"><strong>Project Size :</strong> {{ projectObj.plotSize }} {{ projectObj.uomShort }}
+      </p>
+    </div>
+    <div class="col-md-4" *ngIf="projectObj.roadSizeNo">
+      <p *ngIf="projectObj.roadSizeNo"><strong>Road Size :</strong> {{ projectObj.roadSizeNo }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Mosque :</strong> {{ mosqueFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Hospital :</strong> {{ hospitalFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Market :</strong> {{ marketFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Conversion Center :</strong>
+        {{ conventionCenterFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Educational Institute & Play Ground :</strong>
+        {{ eduInstituteFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Fire Station :</strong> {{ fireAndSafetyAapFlagvalue }}
+      </p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Sub Station :</strong> {{ substationFlagvalue}}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Pump House :</strong> {{ pumpHouseFlagvalue }}</p>
+    </div>
+    <div class="col-md-4">
+      <p><strong>Project Security Office :</strong>
+        {{ projectSecurityOfficeFlagvalue}}</p>
+    </div>
+  </div>
+  <hr>
+  <br>
+  <div class="text-center">
+    <h5>Project Properties</h5>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"
+      *ngFor="let item of itemList | paginate: { itemsPerPage: 6, currentPage: curPage }">
+      <div class="flat-item">
+        <div class="flat-item-image">
+          <span class="for-sale">{{ item.itemTypeName }}</span>
+          <a [routerLink]="['/product-details', item.itemNo]">
+            <img [src]="item.itemBrandPhoto" alt="Item Brand">
+          </a>
+          <div class="flat-link">
+            <a [routerLink]="['/product-details', item.itemNo]">More Details</a>
+          </div>
+          <ul class="flat-desc">
+            <li *ngIf="item.flatSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.flatSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.plotSize">
+              <img src="assets/images/icons/4.png" alt="">
+              <span>{{ item.plotSize }} {{ item.uomShort }}</span>
+            </li>
+            <li *ngIf="item.totalPrice">
+              <span> <strong>TK.</strong>{{ item.totalPrice | number : '1.2-2' }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flat-item-info">
+          <div class="flat-title-price">
+            <h5><a [routerLink]="['/product-details', item.itemNo]">{{ item.itemId }} </a></h5>
+            <span class="price"><strong>TK.</strong>{{ item.price }}/{{ item.uomShort }}</span>
+          </div>
+          <p>
+            <img src="assets/images/icons/location.png" alt="">
+            {{item.projectLocation}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- flat-item -->
+  </div>
+  <div class="text-center">
+    <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+  </div>
+</div>

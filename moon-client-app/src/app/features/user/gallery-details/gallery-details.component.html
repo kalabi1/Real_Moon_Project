@@ -1,0 +1,21 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h4>{{ gallery.galleryTitle }}</h4>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+  <div class="gallery-detail-photo">
+    <img [src]="galleryPhotoUrl" alt="gallery photo">
+  </div>
+  <br>
+  <div class="gallery-details-decr">
+    <p class="gallery-descr-control" [innerHtml]="gallery.galleryDescr"></p>
+  </div>
+</div>

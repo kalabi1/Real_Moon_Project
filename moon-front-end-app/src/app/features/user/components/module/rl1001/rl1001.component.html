@@ -1,0 +1,181 @@
+<div class="row">
+  <!-- facing Setup -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Facing Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th> Facing Name </th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let facing of facingList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="facing.facingName"
+                    name="facingName-{{i}}"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteFacing(facing.facingNo, i)"><i
+                      class="fa fa-times"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewFacing()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveRlFacingList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+  <!-- facing Setup -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">Plot Position Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th> Position Name </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let position of positionList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="position.positionName"
+                    name="positionName-{{i}}"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeletePosition(position.positionNo, i)"><i
+                      class="fa fa-times"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewPosition()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveRlPositionList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Road Size Setup -->
+<!-- <div class="col-md-3">
+    <div class="card">
+      <h6 class="card-header">Road Size Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Road Size </th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let roadSize of roadSizeList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="roadSize.roadSize"
+                    name="roadSize-{{i}}"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteRoadSize(roadSize.sizeNo, i)"><i
+                      class="fa fa-times"></i>&nbsp;Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewRoadSize()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveRoadSizeList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div> -->
+<!-- Uom Setup -->
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">UoM Setup</h6>
+      <div class="card-body">
+        <div class="table-responsive scroll-4">
+          <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th>SL.NO.</th>
+                <th>Uom </th>
+                <th>Uom Short</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inuom of uomList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="inuom.uom" name="uom-{{i}}">
+                </td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="inuom.uomShort"
+                    name="uomShort-{{i}}"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onClickDeleteuom(inuom.uomNo, i)"><i
+                      class="fa fa-times"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary  btn-sm" (click)="onClickAddNewUom()"><i class="fa fa-plus"></i>&nbsp;Add
+          New</button>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveUomList()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+  <!-- Real Estate Configuration -->
+  <div class="col-md-6">
+    <div class="card">
+      <h6 class="card-header">RE Configuration</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Features Property List No.</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="rlConfig.displayFeatureListNumber"
+                name="displayFeatureListNumber">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Contact Message Send To</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="rlConfig.contactMailSendTo"
+                name="contactMailSendTo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Contact Message Send CC</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="rlConfig.contactMailSendCc"
+                name="contactMailSendCc">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Contact Message Send BCC</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="rlConfig.contactMailSendBcc"
+                name="contactMailSendBcc">
+            </div>
+            <!--/.form-group-->
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm ml-base m-1" (click)="onClickSaveRlConfiguration()"><i
+            class="fa fa-check"></i>&nbsp;Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<nl-popup></nl-popup>

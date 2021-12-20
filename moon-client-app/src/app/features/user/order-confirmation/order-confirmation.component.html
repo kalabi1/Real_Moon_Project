@@ -1,0 +1,935 @@
+<form class="container" #orderForm="ngForm" novalidate>
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-md-10 offset-2">
+      <div class="row">
+        <div class="col-md-5">
+          <span>
+            <h3>{{ itemObj.itemName }}</h3> {{itemObj.itemId}}
+          </span>
+        </div>
+        <div class="col-md-7">
+        </div>
+        <div class="col-md-5 col-sm-6 col-xs-12">
+          <div class="flat-item">
+            <div class="flat-item-image">
+              <span class="for-sale">{{ itemObj.itemTypeName }}</span>
+              <a *ngIf="itemObj.itemNo" [routerLink]="['/product-details', itemObj.itemNo]">
+                <img [src]="itemObj.projectLayoutPhoto" alt="Item Brand">
+              </a>
+              <div class="flat-link">
+                <a *ngIf="itemObj.itemNo" [routerLink]="['/product-details', itemObj.itemNo]">More Details</a>
+              </div>
+              <ul class="flat-desc">
+                <li *ngIf="itemObj.flatSize">
+                  <img src="assets/images/icons/4.png" alt="">
+                  <span>{{ itemObj.flatSize }} {{ itemObj.uomShort }}</span>
+                </li>
+                <li *ngIf="itemObj.plotSize">
+                  <img src="assets/images/icons/4.png" alt="">
+                  <span>{{ itemObj.plotSize }} {{ itemObj.uomShort }}</span>
+                </li>
+                <li *ngIf="itemObj.bedRoom">
+                  <i class="fa fa-bed fa-lg"></i>
+                  <span> {{ itemObj.bedRoom }}</span>
+                </li>
+                <li *ngIf="itemObj.kitchen">
+                  <i class="fa fa-cutlery fa-lg"></i>
+                  <span> {{ itemObj.kitchen }}</span>
+                </li>
+                <li *ngIf="itemObj.roadSize">
+                  <i class="fa fa-road fa-lg"></i>
+                  <span> {{ itemObj.roadSize }}</span>
+                </li>
+                <li *ngIf="itemObj.blockName">
+                  <i class="fa fa-bold fa-lg"></i>
+                  <span> {{ itemObj.blockName }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="iteam-details">
+            <div class="col-md-12">
+              <div class="price ">
+                <h4 class=""><small><s>
+                      {{ itemObj.totalPrice | number:'1.2-2' }}</s></small><br>
+                  {{ itemObj.netPrice | number:'1.2-2' }} Tk</h4>
+
+              </div>
+            </div>
+            <div class="col-md-12 " *ngIf="itemObj.projectName"><b>Project Name:</b> {{ itemObj.projectName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.projectLocation"><b>Project Location:</b>
+              {{ itemObj.projectLocation }}</div>
+            <div class="col-md-12" *ngIf="itemObj.projectTypeName"><b>Project Type:</b> {{ itemObj.projectTypeName }}
+            </div>
+            <div class="col-md-12" *ngIf="itemObj.facingName"><b>Flat Facing:</b> {{ itemObj.facingName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.blockName"><b>Block:</b> {{ itemObj.blockName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.flatSize"><b>Flat Size:</b> {{ itemObj.flatSize }}</div>
+            <div class="col-md-12" *ngIf="itemObj.decorationCondition"><b>Decoration and Condition:</b>
+              {{ itemObj.decorationCondition }}</div>
+            <div class="col-md-6" *ngIf="itemObj.flatPlaceofStorid"><b>Flat Lavel:</b> {{ itemObj.flatPlaceofStorid }}
+            </div>
+            <div class="col-md-6" *ngIf="itemObj.builtYear"><b>Build Year:</b> {{ itemObj.builtYear }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Customer Information</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Customer ID</label>
+                  <input readonly type="text" class="form-control form-control-sm" [(ngModel)]="customer.customerId"
+                    name="customerId">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Customer Name <span class="text-danger">*</span></label>
+                  <input [readonly]="customerName!==null" type="text" class="form-control form-control-sm"
+                    [(ngModel)]="customer.customerName" name="customerName" required #customerName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="customerName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                  <!--/.error-->
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Father's Name <span class="text-danger">*</span></label>
+                  <input [readonly]="isFatherNameDialabled" type="text" class="form-control form-control-sm"
+                    [(ngModel)]="customer.fatherName" name="fatherName" required #fatherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="fatherName.invalid && (fatherName.dirty || fatherName.touched)" class="alert alert-danger">
+                    <div *ngIf="fatherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mother's Name <span class="text-danger">*</span></label>
+                  <input [readonly]="isMotherNameDialabled" type="text" class="form-control form-control-sm"
+                    [(ngModel)]="customer.motherName" name="motherName" required #motherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="motherName.invalid && (motherName.dirty || motherName.touched)" class="alert alert-danger">
+                    <div *ngIf="motherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Permanent Address <span class="text-danger">*</span></label>
+                  <input [readonly]="isPermanentAddressDialabled" type="text" class="form-control form-control-sm"
+                    [(ngModel)]="customer.permanentAddress" name="permanentAddress" required
+                    #permanentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="permanentAddress.invalid && (permanentAddress.dirty || permanentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="permanentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Present Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.presentAddress"
+                    name="presentAddress" required #presentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="presentAddress.invalid && (presentAddress.dirty || presentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="presentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="exampleCheck1" (change)="onChangeAddressCheckbox()"
+                      [(ngModel)]="sameAsPresentAddress" name="sameAsPresentAddress">
+                    <label class="form-check-label" for="exampleCheck1"><small>&nbsp;&nbsp;Same With Permanent
+                        Address?</small></label>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Spouse's Name</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.spouseName"
+                    name="spouseName">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date Of Birth</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.dob" name="dob"
+                    [readonly]="isDateofBirthDialabled" [isDisabled]="isDateofBirthDialabled" bsDatepicker
+                    [isDisabled]="isDisabled" [bsConfig]="{
+                      dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>NID/Birth ID/Passport No. <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.nid" name="nid" required
+                    #nid="ngModel">
+                  <div class="validation-error-class-wrapper" *ngIf="nid.invalid && (nid.dirty || nid.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nid.errors.required">
+                      ID is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nationality <span class="text-danger">*</span></label>
+                  <select class="form-control form-control-sm" [(ngModel)]="customer.nationality" name="nationality"
+                    required #nationality="ngModel">
+                    <option *ngFor="let country of countryList" [value]="country.VALUE">{{ country.TEXT }}</option>
+                  </select>
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nationality.invalid && (nationality.dirty || nationality.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nationality.errors.required">
+                      Nationality is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Telephone No.</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.telephone"
+                    name="telephone">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mobile No. <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.mobile" name="mobile"
+                    required #mobile="ngModel">
+                  <div class="validation-error-class-wrapper" *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="mobile.errors.required">
+                      Mobile number is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="slider-wrapper">
+              <div class="customer-photo border">
+                <img [src]="sliderUrl" alt="Customer Photo">
+              </div>
+              <label>&nbsp;</label>
+              <input class="form-control-file form-control-sm" [disabled]="customer.customerPictureName"
+                ng-model="file_upload" name="multipartFile" type="file" (change)="fileChange($event)" #fileInput>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>E-mail Address</label>
+              <input type="email" class="form-control form-control-sm" [(ngModel)]="customer.email" name="email">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person's Name</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.contactPerson"
+                name="contactPerson">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact Person Mobile</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.cpMobile" name="cpMobile">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Profession<span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="customer.profession_no" name="profession_no"
+                required #profession_no="ngModel">
+                <option *ngFor="let profession of professionList" [value]="profession.lookupdtlNo">
+                  {{ profession.dtlName }}</option>
+              </select>
+              <div class="validation-error-class-wrapper"
+                *ngIf="profession_no.invalid && (profession_no.dirty || profession_no.touched)"
+                class="alert alert-danger">
+                <div *ngIf="profession_no.errors.required">
+                  Profession number is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Designation</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.designation"
+                name="designation">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Office Address</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="customer.officeAddress"
+                name="officeAddress">
+            </div>
+            <!--/.form-group-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- End Customer Information  -->
+  <br />
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Nominee
+      </h6>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-12">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nominee Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeName"
+                    name="nomineeName" required #nomineeName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineeName.invalid && (nomineeName.dirty || nomineeName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineeName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Father's Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeFatherName"
+                    name="nomineeFatherName" required #nomineeFatherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineeFatherName.invalid && (nomineeFatherName.dirty || nomineeFatherName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineeFatherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mother's Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeMotherName"
+                    name="nomineeMotherName" required #nomineeMotherName="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineeMotherName.invalid && (nomineeMotherName.dirty || nomineeMotherName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineeMotherName.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nominee's Date Of Birth <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeDob"
+                    name="nomineeDob" bsDatepicker [bsConfig]="{
+              dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>NID/Birth Certificate No.<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeNid"
+                    name="nomineeNid" required #nid="ngModel">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Relation with Applicants <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.relationWithApplicants"
+                    name="relationWithApplicants" required #relationWithApplicants="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="relationWithApplicants.invalid && (relationWithApplicants.dirty || relationWithApplicants.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="relationWithApplicants.errors.required">
+                      Relation Application is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Permanent Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineePermanentAddress"
+                    name="nomineePermanentAddress" required #nomineePermanentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineePermanentAddress.invalid && (nomineePermanentAddress.dirty || nomineePermanentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineePermanentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Present Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineePresentAddress"
+                    name="nomineePresentAddress" required #nomineePresentAddress="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineePresentAddress.invalid && (nomineePresentAddress.dirty || nomineePresentAddress.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineePresentAddress.errors.required">
+                      Address is required.
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="exampleCheck20" (change)="onChangeNomineeAddressCheckbox()"
+                      [(ngModel)]="sameAsNomineePresentAddress" name="sameAsNomineePresentAddress">
+                    <label class="form-check-label" for="exampleCheck20"><small>Same with Permanent
+                        Address?</small></label>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Contact Number <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeMobile"
+                    name="nomineeMobile" required #nomineeMobile="ngModel">
+                  <div class="validation-error-class-wrapper"
+                    *ngIf="nomineeMobile.invalid && (nomineeMobile.dirty || nomineeMobile.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="nomineeMobile.errors.required">
+                      Number is required.
+                    </div>
+                  </div>
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nominee's E-mail</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.nomineeEmail"
+                    name="nomineeEmail">
+                </div>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Percentage</label>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="nominee.percentage"
+                    name="percentage">
+                </div>
+                <!--/.form-group-->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="slider-wrapper ml-4">
+              <h6>Nominee Photo</h6>
+              <div class="Nominee-photo border">
+                <img [src]="nomineePhotoUrl" alt="Nominee Photo">
+              </div>
+              <input class="form-control-file form-control-sm mt-1" (change)="fileNomineeChange($event)"
+                ng-model="file_upload" name="nomineePhotoFile" type="file" #fileNomineeInput>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Price and Payment Schedule
+      </h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Price (Per {{itemObj.uomShort}}) Tk</label>
+              <div class="border-control border">
+                {{ itemObj.price | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div *ngIf="itemObj.itemTypeNo===2" class="col-md-4">
+            <div class="form-group">
+              <label>Flat Size (Per {{itemObj.uomShort}})</label>
+              <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="itemObj.flatSize"
+                name="flatSize">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div *ngIf="itemObj.itemTypeNo===1" class="col-md-4">
+            <div class="form-group">
+              <label>Plot Size ({{itemObj.uomShort}})</label>
+              <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="itemObj.plotSize"
+                name="plotSize">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Total Price</label>
+              <div class="border-control border">
+                {{ transaction.totalPrice | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Special Discount (if have)</label>
+              <div class="border-control border">
+                {{ transaction.totalPrice-transaction.settlementPrice | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Settlement Price</label>
+              <div class="border-control border">
+                {{ transaction.settlementPrice | number : '1.2-2' }}
+              </div>
+
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>In Words</label>
+              <input type="text" class="form-control form-control-sm" readonly [(ngModel)]="settlementPriceSpellOut"
+                name="settlementPriceSpellOut">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Booking Reference Person</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.bookingRefPerson"
+                name="bookingRefPerson">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Officer ID</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.officerId"
+                name="officerId">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Contact No.</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.refContactNo"
+                name="refContactNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Mode of Payment <span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="transaction.paymentType" name="paymentType"
+                required #paymentType="ngModel">
+                <option value="P">Full Pay</option>
+                <option value="I">Installment</option>
+                <option value="O">Others</option>
+              </select>
+              <div class="validation-error-class-wrapper"
+                *ngIf="paymentType.invalid && (paymentType.dirty || paymentType.touched)" class="alert alert-danger">
+                <div *ngIf="paymentType.errors.required">
+                  Payment type is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Booking Money Date</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.bookingMoneyDate"
+                name="bookingMoneyDate" bsDatepicker [bsConfig]="{
+              dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Pay Mode <span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="transaction.payMode" name="payMode" required
+                #payMode="ngModel">
+                <option value="C">Cash</option>
+                <option value="CQ">Cheque</option>
+                <option value="D">DD</option>
+                <option value="P">Pay Order</option>
+                <option value="T">TT</option>
+              </select>
+              <div class="validation-error-class-wrapper" *ngIf="payMode.invalid && (payMode.dirty || payMode.touched)"
+                class="alert alert-danger">
+                <div *ngIf="payMode.errors.required">
+                  Pay mod is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Cash/Cheque/DD/Pay Oder/TT No.</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.chequeNo"
+                name="chequeNo">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bank Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.bankName" name="bankName"
+                required #bankName="ngModel">
+              <div class="validation-error-class-wrapper"
+                *ngIf="bankName.invalid && (bankName.dirty || bankName.touched)" class="alert alert-danger">
+                <div *ngIf="bankName.errors.required">
+                  Bank name is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Branch Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.branchName"
+                name="branchName" required #branchName="ngModel">
+              <div class="validation-error-class-wrapper"
+                *ngIf="branchName.invalid && (branchName.dirty || branchName.touched)" class="alert alert-danger">
+                <div *ngIf="branchName.errors.required">
+                  Branch name is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>A/C No <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.bankAccNo"
+                name="bankAccNo" required #bankAccNo="ngModel">
+              <div class="validation-error-class-wrapper"
+                *ngIf="bankAccNo.invalid && (bankAccNo.dirty || bankAccNo.touched)" class="alert alert-danger">
+                <div *ngIf="bankAccNo.errors.required">
+                  A/C no is required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Booking Amount <span class="text-danger">*</span></label>
+              <input (change)="changeBookingAmount()" type="text" class="form-control form-control-sm"
+                [(ngModel)]="transaction.bookingAmount" name="bookingAmount" required #bookingAmount="ngModel">
+              <div class="validation-error-class-wrapper"
+                *ngIf="bookingAmount.invalid && (bookingAmount.dirty || bookingAmount.touched)"
+                class="alert alert-danger">
+                <div *ngIf="bookingAmount.errors.required">
+                  Booking amount is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>TXN No. <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="transaction.transactionId"
+                name="transactionId" required #transactionId="ngModel">
+              <div class="validation-error-class-wrapper"
+                *ngIf="transactionId.invalid && (transactionId.dirty || transactionId.touched)"
+                class="alert alert-danger">
+                <div *ngIf="transactionId.errors.required">
+                  TXN no required.
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>In Words</label>
+              <input type="text" class="form-control form-control-sm" name="bookingAmountSpellOut"
+                [(ngModel)]="bookingAmountSpellOut">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Down Payment (%)</label>
+              <input type="text" class="form-control form-control-sm" (change)="calDownPayAmount()"
+                name="downPaymentPct" [(ngModel)]="transaction.downPaymentPct">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Down Payment Tk.</label>
+              <input type="text" class="form-control form-control-sm" name="downPaymentAmount"
+                [(ngModel)]="transaction.downPaymentAmount" (change)="changeDwnPaymentAmount()">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Pay Mode <span class="text-danger">*</span></label>
+              <select class="form-control form-control-sm" [(ngModel)]="transaction.downPaymentType"
+                name="downPaymentType" required #downPaymentType="ngModel">
+                <option value="C">Cash</option>
+                <option value="CQ">Cheque</option>
+                <option value="D">DD</option>
+                <option value="P">Pay Order</option>
+                <option value="T">TT</option>
+              </select>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Money Receipt No.</label>
+              <input type="text" class="form-control form-control-sm" name="moneyReceiptNo"
+                [(ngModel)]="transaction.moneyReceiptNo">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="text" class="form-control form-control-sm" name="downPaymentDate"
+                [(ngModel)]="transaction.downPaymentDate" bsDatepicker [bsConfig]="{
+                    dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Remaining Amount</label>
+              <div class="border-control border">
+                {{ (transaction.remainingAmount) | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>In Words</label>
+              <input type="text" class="form-control form-control-sm" name="remainingAmountSpellOut"
+                [(ngModel)]="remainingAmountSpellOut">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Installments No.</label>
+              <input
+                [readonly]="!(((this.transaction.settlementPrice-this.transaction.bookingAmount+this.transaction.downPaymentAmount)-this.installmentPayAmount)>0)"
+                type="text" class="form-control form-control-sm" name="installmentsNo"
+                [(ngModel)]="transaction.installmentsNo" (change)="changeInstallmentsNo()">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Per Installment Amount</label>
+              <div class="border-control border">
+                {{transaction.perinstallmentAmount | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Installment Start From (Date)</label>
+              <input type="text" bsDatepicker [bsConfig]="{
+                dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" name="installStartDate"
+                [(ngModel)]="transaction.installStartDate" class="form-control form-control-sm">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Last Installment Do (Date)</label>
+              <input type="text" bsDatepicker [bsConfig]="{
+                dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" name="installmentEndDate"
+                [isDisabled]="isDisabled" [(ngModel)]="transaction.installmentEndDate"
+                class="form-control form-control-sm">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Collected Installment No.</label>
+              <input readonly type="text" name="installmentPayCount" [(ngModel)]="installmentPayCount"
+                class="form-control form-control-sm">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Collected Installment Amount</label>
+              <input readonly type="text" name="installmentPayAmount" [(ngModel)]="installmentPayAmount"
+                class="form-control form-control-sm">
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Installment Pending Amount</label>
+              <div class="border-control border">
+                {{ ((transaction.remainingAmount)-installmentPayAmount) | number : '1.2-2' }}
+              </div>
+            </div>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-12">
+            <h4>Installment Calculation</h4>
+            <div class="table-responsive scroll-4">
+              <table class="table table-bordered table-hover table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th>SL.NO.</th>
+                    <th> Amount </th>
+                    <th> Date </th>
+                    <th> Paid Amount </th>
+                    <th> Pending Amount </th>
+                    <th> Pay Status </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let installment of trnInstallmentList; let i = index">
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.installmentSl" name="installmentSl-{{i}}" value="i+1"></td>
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.installmentAmount" name="installmentAmount-{{i}}"></td>
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.installmentDate" bsDatepicker [isDisabled]="isDisabled" [bsConfig]="{
+                          dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" name="installStartDate"
+                        [(ngModel)]="transaction.installStartDate" name="installmentDate-{{i}}"></td>
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.paidAmount" name="paidAmount-{{i}}"></td>
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.pendingAmount" name="pendingAmount-{{i}}"></td>
+                    <td><input readonly type="text" class="form-control form-control-sm"
+                        [(ngModel)]="installment.installmentPayStatus" name="installmentPayStatus-{{i}}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-check d-flex">
+              <input type="checkbox" class="form-check-input form-check-input-md" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1"><b>I agree with terms, conditions, rules & regulations
+                  of
+                  the Company and I am committed to all decision of South Star Manor Limited
+                  Management.</b></label>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <p class="ml-3"><strong>Note:</strong><br>
+              1.The above Price did not Include VAT, Income Tex, Registration Fee, Utility Connection, Development
+              charge and other related costs<br>
+              2.The Booking will take effect after Encasement at Booking Money and Down Payments.</p>
+          </div>
+          <div class="col-md-4 mt-3">
+            <div class="signature-slider-wrapper">
+              <h6>Signature</h6>
+              <div class="signature-photo-warper border">
+                <img [src]="signaturePhotoUrl" alt="signature Photo">
+              </div>
+              <input class="form-control-file form-control-sm mt-1" ng-model="file_upload" name="signatureFile"
+                type="file" (change)="fileSignatureChange($event)" #fileSignatureInput>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="text-center">
+          <button type="button" class="btn btn-lg btn-primary " [disabled]="!orderForm.valid"
+            (click)="onClickSaveAll()"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Confirm Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</form>
+<nl-popup></nl-popup>

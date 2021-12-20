@@ -1,0 +1,337 @@
+<form class="container" #orderForm="ngForm" novalidate>
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-md-10 offset-2">
+      <div class="row">
+        <div class="col-md-5">
+          <span>
+            <h3>{{ itemObj.itemName }}</h3> {{itemObj.itemId}}
+          </span>
+        </div>
+        <div class="col-md-7">
+        </div>
+        <div class="col-md-5 col-sm-6 col-xs-12">
+          <div class="flat-item">
+            <div class="flat-item-image">
+              <span class="for-sale">{{ itemObj.itemTypeName }}</span>
+              <a *ngIf="itemObj.itemNo" [routerLink]="['/product-details', itemObj?.itemNo]">
+                <img [src]="itemObj.projectLayoutPhoto" alt="Item Brand">
+              </a>
+              <div class="flat-link">
+                <a *ngIf="itemObj.itemNo" [routerLink]="['/product-details', itemObj?.itemNo]">More Details</a>
+              </div>
+              <ul class="flat-desc">
+                <li *ngIf="itemObj.flatSize">
+                  <img src="assets/images/icons/4.png" alt="">
+                  <span>{{ itemObj.flatSize }} {{ itemObj.uomShort }}</span>
+                </li>
+                <li *ngIf="itemObj.plotSize">
+                  <img src="assets/images/icons/4.png" alt="">
+                  <span>{{ itemObj.plotSize }} {{ itemObj.uomShort }}</span>
+                </li>
+                <li *ngIf="itemObj.bedRoom">
+                  <i class="fa fa-bed fa-lg"></i>
+                  <span> {{ itemObj.bedRoom }}</span>
+                </li>
+                <li *ngIf="itemObj.kitchen">
+                  <i class="fa fa-cutlery fa-lg"></i>
+                  <span> {{ itemObj.kitchen }}</span>
+                </li>
+                <li *ngIf="itemObj.roadSize">
+                  <i class="fa fa-road fa-lg"></i>
+                  <span> {{ itemObj.roadSize }}</span>
+                </li>
+                <li *ngIf="itemObj.blockName">
+                  <i class="fa fa-bold fa-lg"></i>
+                  <span> {{ itemObj.blockName }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="iteam-details">
+            <div class="col-md-12">
+              <div class="price ">
+                <h4 class=""><small><s>
+                      {{ itemObj.totalPrice | number:'1.2-2' }}</s></small><br>
+                  {{ itemObj.netPrice | number:'1.2-2' }} Tk</h4>
+              </div>
+            </div>
+            <div class="col-md-12 " *ngIf="itemObj.projectName"><b>Project Name:</b> {{ itemObj.projectName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.projectLocation"><b>Project Location:</b>
+              {{ itemObj.projectLocation }}</div>
+            <div class="col-md-12" *ngIf="itemObj.projectTypeName"><b>Project Type:</b> {{ itemObj.projectTypeName }}
+            </div>
+            <div class="col-md-12" *ngIf="itemObj.facingName"><b>Flat facing:</b> {{ itemObj.facingName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.blockName"><b>Block:</b> {{ itemObj.blockName }}</div>
+            <div class="col-md-12" *ngIf="itemObj.flatSize"><b>Flat Size:</b> {{ itemObj.flatSize }}</div>
+            <div class="col-md-12" *ngIf="itemObj.decorationCondition"><b>Decoration and Condition:</b>
+              {{ itemObj.decorationCondition }}</div>
+            <div class="col-md-6" *ngIf="itemObj.flatPlaceofStorid"><b>Flat Lavel:</b> {{ itemObj.flatPlaceofStorid }}
+            </div>
+            <div class="col-md-6" *ngIf="itemObj.builtYear"><b>Build Year:</b> {{ itemObj.builtYear }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Customer Information</h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="slider-wrapper">
+              <div class="customer-photo border">
+                <img *ngIf="customer.customerPictureName" [src]="customerPhotoUrl" alt="customer-photo">
+              </div>
+              <br>
+              <h4 class="text-center">{{customer.customerName}}</h4>
+              <br>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <p> <strong>ID:</strong> {{customer.customerId}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Name:</strong> {{customer.customerName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Father's name:</strong> {{customer.fatherName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Mother's name:</strong> {{customer.motherName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Permanent Address:</strong> {{customer.permanentAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Present Address:</strong> {{customer.presentAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Spouse name:</strong> {{customer.spouseName}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Date of Birth:</strong> {{customer.dob | date:'d-MMM-y'}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>NID/Birth ID/Passport No.:</strong> {{customer.nid}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Nationality:</strong> {{customer.nationalityDisplay}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Mobile:</strong> {{customer.mobile}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Email:</strong> {{customer.email}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Telephone:</strong> {{customer.telephone}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Designation:</strong> {{customer.designation}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Office Address:</strong> {{customer.officeAddress}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Contact Person:</strong> {{customer.contactPerson}} </p>
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Contact Person Mobile:</strong> {{customer.cpMobile}} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Nominee Information
+      </h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Information of the Nominee </h4>
+          </div>
+          <hr>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6 mt-4">
+                <p> <strong>Nominee's Name:</strong> {{nominee.nomineeName}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6 mt-4">
+                <p> <strong>Father's Name:</strong> {{nominee.nomineeFatherName}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Mother's Name:</strong> {{nominee.nomineeMotherName}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Relation with Applicants:</strong> {{nominee.relationWithApplicants}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Permanent Address:</strong> {{nominee.nomineePermanentAddress}} </p>
+                <!--/.form-group-->
+
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Present Address:</strong> {{nominee.nomineePresentAddress}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <p> <strong>Contact Number:</strong> {{nominee.nomineeMobile}} </p>
+                <!--/.form-group-->
+              </div>
+              <div class="col-md-6">
+                <p> <strong>E-mail:</strong> {{nominee.nomineeEmail}} </p>
+                <!--/.form-group-->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="slider-wrapper ml-4">
+              <h6>Nominee's Photo</h6>
+              <div class="Nominee-photo border">
+                <img [src]="nominee.nomineePictureName" alt="Nominee Photo">
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="card">
+      <h6 class="card-header">Price and Payment Schedule
+      </h6>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <p> <strong>Price :</strong> {{itemObj.price}} </p>
+            <!--/.form-group-->
+          </div>
+          <div *ngIf="itemObj.itemTypeNo===2" class="col-md-4">
+            <p> <strong>Flat Size :</strong> {{itemObj.flatSize}} </p>
+            <!--/.form-group-->
+          </div>
+          <div *ngIf="itemObj.itemTypeNo===1" class="col-md-4">
+            <p> <strong>Plot Size :</strong> {{itemObj.plotSize}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Total Price :</strong> {{transaction.totalPrice}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Spacial Discount(if have) :</strong> {{transaction.specialDiscountAmt}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Settlement Price :</strong> {{transaction.settlementPrice}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Booking Reference Person :</strong> {{transaction.bookingRefPerson}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Officer ID :</strong> {{transaction.officerId}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Contact No. :</strong> {{transaction.refContactNo}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Booking Amount :</strong> {{transaction.bookingAmount}} </p>
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Bank Name :</strong> {{transaction.bankName}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Branch Name :</strong> {{transaction.branchName}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>A/C No. :</strong> {{transaction.bankAccNo}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>TXN No. :</strong> {{transaction.transactionId}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Booking Money Date :</strong> {{transaction.bookingMoneyDate}} </p>
+            <!--/.form-group-->
+          </div>
+          <div class="col-md-4">
+            <p> <strong>Order Status :</strong> {{transaction.approveFlagName}} </p>
+            <!--/.form-group-->
+          </div>
+        </div>
+        <br>
+        <strong>Installment Calculation :</strong>
+        <table class="table table-bordered table-hover table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>SL.NO.</th>
+              <th> Amount </th>
+              <th> Date </th>
+              <th> Paid Amount </th>
+              <th> Pending Amount </th>
+              <th> Pay Status </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let installment of trnInstallmentList; let i = index">
+              <td><input readonly type="text" class="form-control form-control-sm"
+                  [(ngModel)]="installment.installmentSl" name="installmentSl-{{i}}" value="i+1"></td>
+              <td><input readonly type="text" class="form-control form-control-sm"
+                  [(ngModel)]="installment.installmentAmount" name="installmentAmount-{{i}}"></td>
+              <td><input readonly type="text" class="form-control form-control-sm"
+                  [(ngModel)]="installment.installmentDate" bsDatepicker [isDisabled]="isDisabled" [bsConfig]="{
+                      dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }" name="installStartDate"
+                  [(ngModel)]="transaction.installStartDate" name="installmentDate-{{i}}"></td>
+              <td><input readonly type="text" class="form-control form-control-sm" [(ngModel)]="installment.paidAmount"
+                  name="paidAmount-{{i}}"></td>
+              <td><input readonly type="text" class="form-control form-control-sm"
+                  [(ngModel)]="installment.pendingAmount" name="pendingAmount-{{i}}"></td>
+              <td><input readonly type="text" class="form-control form-control-sm"
+                  [(ngModel)]="installment.installmentPayStatus" name="installmentPayStatus-{{i}}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary" [routerLink]="['/my-order']">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</form>
+<nl-popup></nl-popup>

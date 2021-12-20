@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <h6 class="col-md-3">Contact List</h6>
+      <div class="col-md-6">
+        <div class="text-right">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" (click)="getFilterList(0)" class="btn btn-warning">Unread&nbsp;<span
+                class="badge badge-light">{{unreadCount}}</span></button>
+            <button type="button" (click)="getFilterList(1)" class="btn btn-warning">Read&nbsp;<span
+                class="badge badge-light ">{{readCount}}</span></button>
+            <button type="button" (click)="getFilterList(4)" class="btn btn-warning">All&nbsp;<span
+                class="badge badge-light ">{{allMessageCount}}</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>Show Record:&nbsp;</label>
+            <select class="form-control form-control-sm" [(ngModel)]="showRecordsNo" name="showRecordsNo">
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover table-bordered ">
+        <thead class="thead-light">
+          <tr>
+            <th>Serial</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Comments</th>
+            <th>Contact Date</th>
+            <th>Read Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let contact of filterPropertyContactList | paginate: { itemsPerPage: showRecordsNo, currentPage: curPage }; let i = index;"
+            [class.bg-light]="contact.readFlag===0">
+            <td>{{ i+1 }}</td>
+            <td>{{ contact.cpName }}</td>
+            <td>{{ contact.cpMobile }}</td>
+            <td>{{ contact.cpEmail }}</td>
+            <td>{{ contact.cpComments }}</td>
+            <td>{{ contact.contactDate | date:'d-MMM-y h:mm:ss a'}}</td>
+            <td>{{ contact.readFlag }}</td>
+            <td><button type="button" *ngIf="contact.readFlag===0" (click)="onClickRead(i)"
+                class="btn btn-secondary form-control-sm"> Mark As Read</button>
+              <button type="button" *ngIf="contact.readFlag===1" (click)="onClickUnRead(i)"
+                class="btn btn-secondary form-control-sm"> Mark As Unread</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <pagination-controls (pageChange)="curPage = $event"></pagination-controls>
+</div>
